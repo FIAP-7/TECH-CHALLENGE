@@ -8,5 +8,5 @@ public interface UsuarioGateway {
 
     public Long criar(Usuario usuario);
 
-    public Optional<Usuario> buscarPorCpf(String cpf);
+    public Optional<Usuario> buscarPorLogin(String login);
 }
