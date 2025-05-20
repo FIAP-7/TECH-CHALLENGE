@@ -44,11 +44,11 @@ public class UsuarioJpaGateway implements UsuarioGateway {
     }
 
     @Override
-    public Optional<Usuario> buscarPorCpf(String cpf) {
-        Optional<UsuarioEntity> usuarioEntityOptional = usuarioRepository.findByCpf(cpf);
+    public Optional<Usuario> buscarPorLogin(String login) {
+        Optional<UsuarioEntity> usuarioEntityOptional = usuarioRepository.findByLogin(login);
 
         if(usuarioEntityOptional.isEmpty()){
-            log.info("Usuário não foi encontrado: CPF={}", cpf);
+            log.info("Usuário não foi encontrado: Login={}", login);
             return Optional.empty();
         }
 

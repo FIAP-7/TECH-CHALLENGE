@@ -22,10 +22,10 @@ public class CriarUsuarioCadastradoRule implements CriarUsuarioRuleBase {
     public Optional<OutputDto> validate(InputDto inputDto) {
         Usuario novoUsuario = inputDto.getNovoUsuario();
 
-        Optional<Usuario> usuario = usuarioGateway.buscarPorCpf(novoUsuario.getCpf());
+        Optional<Usuario> usuario = usuarioGateway.buscarPorLogin(novoUsuario.getLogin());
 
         if(usuario.isPresent()) {
-            log.warn("Usuário já existe com o cpf informado. {}", novoUsuario.getCpf());
+            log.warn("Usuário já existe com o login informado. {}", novoUsuario.getLogin());
             throw new UsuarioExistenteException();
         }
 
