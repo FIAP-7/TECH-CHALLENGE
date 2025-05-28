@@ -59,6 +59,25 @@ public class UsuarioJpaGateway implements UsuarioGateway {
         
         log.info("Usuário deletado com sucesso: ID={}", id);
     }
+
+    @Override
+	public void atualizarSenha(Long id, String novaSenha) {
+		try {
+			Optional<UsuarioEntity> usuarioEntity = usuarioRepository.findById(id);
+	    	
+	        if (!usuarioEntity.isPresent()) {
+	            throw new UsuarioNaoEncontradoException();
+	        }
+	        
+	        usuarioEntity.get().setDataUltimaAlteracao(LocalDateTime.now());
+	        usuarioEntity.get().setSenha(novaSenha);
+	        
+	        usuarioRepository.save(usuarioEntity.get());    
+	    }catch (Exception e){
+	        log.error(e.getMessage());
+	        throw new ErroAoAcessarRepositorioException();
+	    }
+	}
     
     @Override
     public Optional<Usuario> buscarPorLogin(String login) {

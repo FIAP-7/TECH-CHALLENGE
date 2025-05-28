@@ -11,4 +11,6 @@ public interface UsuarioGateway {
     public void deletar(Long id); 
 
     public Optional<Usuario> buscarPorLogin(String login);
+
+    public void atualizarSenha(Long id, String novaSenha);
 }
