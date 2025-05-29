@@ -13,4 +13,9 @@ public interface UsuarioGateway {
     public Optional<Usuario> buscarPorLogin(String login);
 
     public void atualizarSenha(Long id, String novaSenha);
+       
+    public Optional<Usuario> buscarPorId(Long id);
+
+	  public void atualizar(Long id, Usuario usuario);
+
 }

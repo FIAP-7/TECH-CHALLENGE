@@ -95,6 +95,31 @@ public class UsuarioJpaGateway implements UsuarioGateway {
         return Optional.of(usuario);
     }
 
+    @Override
+    @Transactional
+	public void atualizar(Long id, Usuario usuario) {
+    	try {
+	        UsuarioEntity novoUsuario = mapToEntity(usuario);
+	        novoUsuario.setId(id); 
+	        novoUsuario.setDataUltimaAlteracao(LocalDateTime.now());
+	        
+	        enderecoRepository.save(novoUsuario.getEndereco());
+	        usuarioRepository.save(novoUsuario);
+	    }catch (Exception e){
+	        log.error(e.getMessage());
+	        throw new ErroAoAcessarRepositorioException();
+	    }
+	}
+	
+	@Override
+	public Optional<Usuario> buscarPorId(Long id) {
+		var usuarioEntity = usuarioRepository.findById(id)
+				.orElseThrow(UsuarioNaoEncontradoException::new);
+		
+		var usuario = mapToDomain(usuarioEntity);
+		return Optional.of(usuario);
+	}
+	
     private Usuario mapToDomain(UsuarioEntity usuarioEntity){
         Endereco endereco = new Endereco(
                 usuarioEntity.getEndereco().getId(),
@@ -145,5 +170,5 @@ public class UsuarioJpaGateway implements UsuarioGateway {
 
         return usuarioEntity;
     }
-
+    
 }
