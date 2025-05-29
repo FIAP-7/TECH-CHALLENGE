@@ -4,12 +4,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.postech.gestao_restaurantes.controller.json.LoginJson;
 import br.com.fiap.postech.gestao_restaurantes.controller.json.UsuarioJson;
+import br.com.fiap.postech.gestao_restaurantes.domain.Usuario;
+import br.com.fiap.postech.gestao_restaurantes.usecase.AtualizarUsuarioUseCase;
 import br.com.fiap.postech.gestao_restaurantes.usecase.CriarUsuarioUsecase;
 import br.com.fiap.postech.gestao_restaurantes.usecase.DeletarUsuarioUsecase;
 import br.com.fiap.postech.gestao_restaurantes.usecase.validarLogin.AutenticarUsuarioUsecase;
@@ -26,6 +29,7 @@ public class AuthController {
     private final CriarUsuarioUsecase criarUsuarioUsecase;
     private final DeletarUsuarioUsecase deletarUsuarioUseCase;
     private final AutenticarUsuarioUsecase autenticarUsuarioUsecase;
+    private final AtualizarUsuarioUseCase atualizarUsuarioUseCase;
 
     @PostMapping("/register")
     public Long criar(@Valid @RequestBody UsuarioJson usuarioJson) {
@@ -47,5 +51,11 @@ public class AuthController {
         } else {
             return ResponseEntity.status(401).body("Credenciais inválidas");
         }
+    }
+
+    @PutMapping("/update-user/{id}")
+    public ResponseEntity<Usuario> atualizarUsuario(@PathVariable Long id,@Valid @RequestBody UsuarioJson usuarioJson){
+    	atualizarUsuarioUseCase.executar(id, usuarioJson.mapToDomain());
+    	return ResponseEntity.noContent().build();
     }
 }
