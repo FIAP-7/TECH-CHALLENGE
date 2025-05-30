@@ -16,6 +16,6 @@ public interface UsuarioGateway {
        
     public Optional<Usuario> buscarPorId(Long id);
 
-	  public void atualizar(Long id, Usuario usuario);
+    public void atualizar(Long id, Usuario usuario);
 
 }
