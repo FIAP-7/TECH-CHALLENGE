@@ -1,8 +1,14 @@
 package br.com.fiap.postech.gestao_restaurantes.gateway.database.jpa;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+
+import org.springframework.stereotype.Component;
+
 import br.com.fiap.postech.gestao_restaurantes.domain.Endereco;
 import br.com.fiap.postech.gestao_restaurantes.domain.Usuario;
 import br.com.fiap.postech.gestao_restaurantes.exception.ErroAoAcessarRepositorioException;
+import br.com.fiap.postech.gestao_restaurantes.exception.UsuarioNaoEncontradoException;
 import br.com.fiap.postech.gestao_restaurantes.gateway.UsuarioGateway;
 import br.com.fiap.postech.gestao_restaurantes.gateway.database.jpa.entity.EnderecoEntity;
 import br.com.fiap.postech.gestao_restaurantes.gateway.database.jpa.entity.UsuarioEntity;
@@ -11,10 +17,6 @@ import br.com.fiap.postech.gestao_restaurantes.gateway.database.jpa.repository.U
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
-
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Slf4j
 @Component
@@ -44,11 +46,45 @@ public class UsuarioJpaGateway implements UsuarioGateway {
     }
 
     @Override
-    public Optional<Usuario> buscarPorCpf(String cpf) {
-        Optional<UsuarioEntity> usuarioEntityOptional = usuarioRepository.findByCpf(cpf);
+    @Transactional
+    public void deletar(Long id) {
+    	Optional<UsuarioEntity> usuarioById = usuarioRepository.findById(id);
+    	
+        if (!usuarioById.isPresent()) {
+            throw new UsuarioNaoEncontradoException();
+        }
+        
+        enderecoRepository.deleteById(usuarioById.get().getEndereco().getId());
+        usuarioRepository.deleteById(id);
+        
+        log.info("Usuário deletado com sucesso: ID={}", id);
+    }
+
+    @Override
+	public void atualizarSenha(Long id, String novaSenha) {
+		try {
+			Optional<UsuarioEntity> usuarioEntity = usuarioRepository.findById(id);
+	    	
+	        if (!usuarioEntity.isPresent()) {
+	            throw new UsuarioNaoEncontradoException();
+	        }
+	        
+	        usuarioEntity.get().setDataUltimaAlteracao(LocalDateTime.now());
+	        usuarioEntity.get().setSenha(novaSenha);
+	        
+	        usuarioRepository.save(usuarioEntity.get());    
+	    }catch (Exception e){
+	        log.error(e.getMessage());
+	        throw new ErroAoAcessarRepositorioException();
+	    }
+	}
+    
+    @Override
+    public Optional<Usuario> buscarPorLogin(String login) {
+        Optional<UsuarioEntity> usuarioEntityOptional = usuarioRepository.findByLogin(login);
 
         if(usuarioEntityOptional.isEmpty()){
-            log.info("Usuário não foi encontrado: CPF={}", cpf);
+            log.info("Usuário não foi encontrado: Login={}", login);
             return Optional.empty();
         }
 
@@ -59,6 +95,31 @@ public class UsuarioJpaGateway implements UsuarioGateway {
         return Optional.of(usuario);
     }
 
+    @Override
+    @Transactional
+	public void atualizar(Long id, Usuario usuario) {
+    	try {
+	        UsuarioEntity novoUsuario = mapToEntity(usuario);
+	        novoUsuario.setId(id); 
+	        novoUsuario.setDataUltimaAlteracao(LocalDateTime.now());
+	        
+	        enderecoRepository.save(novoUsuario.getEndereco());
+	        usuarioRepository.save(novoUsuario);
+	    }catch (Exception e){
+	        log.error(e.getMessage());
+	        throw new ErroAoAcessarRepositorioException();
+	    }
+	}
+	
+	@Override
+	public Optional<Usuario> buscarPorId(Long id) {
+		var usuarioEntity = usuarioRepository.findById(id)
+				.orElseThrow(UsuarioNaoEncontradoException::new);
+		
+		var usuario = mapToDomain(usuarioEntity);
+		return Optional.of(usuario);
+	}
+	
     private Usuario mapToDomain(UsuarioEntity usuarioEntity){
         Endereco endereco = new Endereco(
                 usuarioEntity.getEndereco().getId(),
@@ -109,5 +170,5 @@ public class UsuarioJpaGateway implements UsuarioGateway {
 
         return usuarioEntity;
     }
-
+    
 }

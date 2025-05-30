@@ -113,4 +113,3 @@ Este repositório está disponível publicamente para avaliação:
 ## 📚 Créditos
 
 Projeto desenvolvido para o **Tech Challenge FIAP** como parte da entrega da fase.
-
