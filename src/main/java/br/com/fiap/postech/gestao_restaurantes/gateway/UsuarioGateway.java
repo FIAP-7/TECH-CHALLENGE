@@ -11,9 +11,11 @@ public interface UsuarioGateway {
     public void deletar(Long id); 
 
     public Optional<Usuario> buscarPorLogin(String login);
+
+    public void atualizarSenha(Long id, String novaSenha);
        
     public Optional<Usuario> buscarPorId(Long id);
 
-	public void atualizar(Long id, Usuario usuario);
+	  public void atualizar(Long id, Usuario usuario);
 
 }
