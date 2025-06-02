@@ -20,7 +20,6 @@ public class EnderecoJson {
     @Schema(description = "ID do endereço", example = "1")
     private Long id;
 
-    @Valid
     @NotBlank
     @Schema(description = "Logradouro", example = "Rua das Flores", required = true)
     private String logradouro;

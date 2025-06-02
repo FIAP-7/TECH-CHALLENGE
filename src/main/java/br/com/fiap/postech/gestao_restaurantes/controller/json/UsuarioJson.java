@@ -3,6 +3,7 @@ package br.com.fiap.postech.gestao_restaurantes.controller.json;
 
 import br.com.fiap.postech.gestao_restaurantes.domain.Usuario;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -43,6 +44,7 @@ public class UsuarioJson {
     private String senha;
 
     @Schema(description = "Endereço do usuário")
+    @Valid
     private EnderecoJson endereco;
 
     public Usuario mapToDomain(){
