@@ -152,7 +152,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Conjuto de requisições para testar o status com sucesso."
 		},
 		{
 			"name": "Request com erro",
@@ -172,11 +173,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/usuarios",
+							"raw": "{{LOCAL_HOST}}/usuarios",
 							"host": [
-								"localhost"
+								"{{LOCAL_HOST}}"
 							],
-							"port": "8080",
 							"path": [
 								"usuarios"
 							]
@@ -199,11 +199,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/usuarios",
+							"raw": "{{LOCAL_HOST}}/usuarios",
 							"host": [
-								"localhost"
+								"{{LOCAL_HOST}}"
 							],
-							"port": "8080",
 							"path": [
 								"usuarios"
 							]
@@ -226,11 +225,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/usuarios",
+							"raw": "{{LOCAL_HOST}}/usuarios",
 							"host": [
-								"localhost"
+								"{{LOCAL_HOST}}"
 							],
-							"port": "8080",
 							"path": [
 								"usuarios"
 							]
@@ -253,11 +251,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/usuarios",
+							"raw": "{{LOCAL_HOST}}/usuarios",
 							"host": [
-								"localhost"
+								"{{LOCAL_HOST}}"
 							],
-							"port": "8080",
 							"path": [
 								"usuarios"
 							]
@@ -280,11 +277,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/usuarios",
+							"raw": "{{LOCAL_HOST}}/usuarios",
 							"host": [
-								"localhost"
+								"{{LOCAL_HOST}}"
 							],
-							"port": "8080",
 							"path": [
 								"usuarios"
 							]
@@ -307,11 +303,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/usuarios",
+							"raw": "{{LOCAL_HOST}}/usuarios",
 							"host": [
-								"localhost"
+								"{{LOCAL_HOST}}"
 							],
-							"port": "8080",
 							"path": [
 								"usuarios"
 							]
@@ -325,11 +320,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/usuarios/74",
+							"raw": "{{LOCAL_HOST}}/usuarios/74",
 							"host": [
-								"localhost"
+								"{{LOCAL_HOST}}"
 							],
-							"port": "8080",
 							"path": [
 								"usuarios",
 								"74"
@@ -344,14 +338,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/usuarios/4",
+							"raw": "{{LOCAL_HOST}}/usuarios/432",
 							"host": [
-								"localhost"
+								"{{LOCAL_HOST}}"
 							],
-							"port": "8080",
 							"path": [
 								"usuarios",
-								"4"
+								"432"
 							]
 						}
 					},
@@ -464,7 +457,37 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Conjunto de requisições para testar os status de erro e a validação de entrada de dados."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "{{LOCAL_HOST}}",
+			"value": "http://localhost:8080",
+			"type": "string"
 		}
 	]
 }
