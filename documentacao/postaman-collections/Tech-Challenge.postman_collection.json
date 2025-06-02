@@ -54,31 +54,13 @@
 					"response": []
 				},
 				{
-					"name": "deletar usuário",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{LOCAL_HOST}}/usuarios/1",
-							"host": [
-								"{{LOCAL_HOST}}"
-							],
-							"path": [
-								"usuarios",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "atualizar usuário",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"cpf\": \"987654321\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura1236!\",\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
+							"raw": "{\r\n\t\"cpf\": \"98765432123\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura1236!\",\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -147,6 +129,24 @@
 							],
 							"path": [
 								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletar usuário",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_HOST}}/usuarios/1",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"usuarios",
+								"1"
 							]
 						}
 					},
@@ -485,7 +485,7 @@
 	],
 	"variable": [
 		{
-			"key": "{{LOCAL_HOST}}",
+			"key": "LOCAL_HOST",
 			"value": "http://localhost:8080",
 			"type": "string"
 		}
