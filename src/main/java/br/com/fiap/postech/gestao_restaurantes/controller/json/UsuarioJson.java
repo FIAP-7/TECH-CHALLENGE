@@ -3,7 +3,7 @@ package br.com.fiap.postech.gestao_restaurantes.controller.json;
 
 import br.com.fiap.postech.gestao_restaurantes.domain.Usuario;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +21,7 @@ public class UsuarioJson {
 
     @NotBlank
     @Schema(description = "CPF do usuário", example = "123.456.789-00", required = true)
+    @Size(min = 11, max = 11, message = "CPF necessita de 11 caracteres")
     private String cpf;
 
     @NotBlank
@@ -29,6 +30,7 @@ public class UsuarioJson {
 
     @NotBlank
     @Schema(description = "Email", example = "joao.silva@email.com", required = true)
+    @Email
     private String email;
 
     @NotBlank
@@ -37,6 +39,7 @@ public class UsuarioJson {
 
     @NotBlank
     @Schema(description = "Senha de acesso", example = "senhaForte123", required = true)
+    @Size(min = 8, message = "Senha necessita de 8 caracteres ou mais")
     private String senha;
 
     @Schema(description = "Endereço do usuário")

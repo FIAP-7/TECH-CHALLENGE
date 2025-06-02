@@ -1,10 +1,10 @@
-package br.com.fiap.postech.gestao_restaurantes.usecase.criarUsuarioRule;
+package br.com.fiap.postech.gestao_restaurantes.usecase.rule.criarUsuarioRule;
 
 import br.com.fiap.postech.gestao_restaurantes.domain.Usuario;
 import br.com.fiap.postech.gestao_restaurantes.exception.UsuarioExistenteException;
 import br.com.fiap.postech.gestao_restaurantes.gateway.UsuarioGateway;
-import br.com.fiap.postech.gestao_restaurantes.usecase.criarUsuarioRule.dto.InputDto;
-import br.com.fiap.postech.gestao_restaurantes.usecase.criarUsuarioRule.dto.OutputDto;
+import br.com.fiap.postech.gestao_restaurantes.usecase.rule.dto.InputDto;
+import br.com.fiap.postech.gestao_restaurantes.usecase.rule.dto.OutputDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
