@@ -1,6 +1,5 @@
 package br.com.fiap.postech.gestao_restaurantes.controller;
 
-import java.util.Optional;
 
 import br.com.fiap.postech.gestao_restaurantes.controller.json.ExceptionJson;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.postech.gestao_restaurantes.controller.json.NovaSenhaJson;
 import br.com.fiap.postech.gestao_restaurantes.controller.json.UsuarioJson;
-import br.com.fiap.postech.gestao_restaurantes.domain.Usuario;
 import br.com.fiap.postech.gestao_restaurantes.usecase.AtualizarSenhaUsuarioUseCase;
 import br.com.fiap.postech.gestao_restaurantes.usecase.AtualizarUsuarioUseCase;
 import br.com.fiap.postech.gestao_restaurantes.usecase.ConsultarUsuarioUseCase;
@@ -97,9 +95,9 @@ public class UsuarioController {
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado",
                     content = @Content(schema = @Schema(implementation = ExceptionJson.class)))
     })
-    public ResponseEntity<Optional<Usuario>> getUsuarioById(@PathVariable Long id){
+    public ResponseEntity<UsuarioJson> getUsuarioById(@PathVariable Long id){
     	var usuario = consultarUsuarioUseCase.executar(id);
-    	return ResponseEntity.ok(usuario);
+        return usuario.map(value -> ResponseEntity.ok(value.mapToJson())).orElseGet(() -> ResponseEntity.ok(null));
     }
     
     @PutMapping("/{id}")
@@ -111,7 +109,7 @@ public class UsuarioController {
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado",
                     content = @Content(schema = @Schema(implementation = ExceptionJson.class)))
     })
-    public ResponseEntity<Usuario> atualizarUsuario(@PathVariable Long id,@Valid @RequestBody UsuarioJson usuarioJson){
+    public ResponseEntity<UsuarioJson> atualizarUsuario(@PathVariable Long id,@Valid @RequestBody UsuarioJson usuarioJson){
     	atualizarUsuarioUseCase.executar(id, usuarioJson.mapToDomain());
     	return ResponseEntity.noContent().build();
     }
