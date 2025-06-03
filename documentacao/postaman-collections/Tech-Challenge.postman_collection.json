@@ -1,159 +1,519 @@
 {
 	"info": {
-		"_postman_id": "87abaf91-c2a3-417c-9347-90c99a5088aa",
+		"_postman_id": "ac926ee0-da8f-4824-8ffe-67493dd81c6e",
 		"name": "Tech-Challenge",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "44259935"
+		"_exporter_id": "44932961"
 	},
 	"item": [
 		{
-			"name": "inserir usuário",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n\t\"cpf\": \"987654321\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura123!\",\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Request com sucesso",
+			"item": [
+				{
+					"name": "inserir usuário",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cpf\": \"987.654.321-22\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura123!\",\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/usuarios",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"usuarios"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:8080/usuarios",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"usuarios"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "buscar usuário",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/usuarios/2",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"usuarios",
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "deletar usuário",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/usuarios/1",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"usuarios",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "atualizar usuário",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n\t\"cpf\": \"987654321\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura1236!\",\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "buscar usuário",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_HOST}}/usuarios/1",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"usuarios",
+								"1"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:8080/usuarios/2",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"usuarios",
-						"2"
-					]
+				{
+					"name": "atualizar usuário",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cpf\": \"987.654.321-22\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura1236!\",\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/usuarios/1",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualizar senha",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"novaSenha\": \"senhaSegura1236!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/usuarios/1/senha",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"usuarios",
+								"1",
+								"senha"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "autenticar usuário",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura1236!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/login",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletar usuário",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_HOST}}/usuarios/1",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"description": "Conjuto de requisições para testar o status com sucesso."
 		},
 		{
-			"name": "atualizar senha",
-			"request": {
-				"method": "PATCH",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"novaSenha\": \"senhaSegura1236!\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Request com erro",
+			"item": [
+				{
+					"name": "inserir usuário - Erro parametros usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cpf\": \"987.654.321-22\",\r\n    \"senha\": \"senhaSegura123!\",\r\n    \"endereco\": {\r\n        \"logradouro\": \"Avenida Brasil\",\r\n        \"numero\": \"1234\",\r\n        \"complemento\": \"apto 101\",\r\n        \"bairro\": \"Centro\",\r\n        \"cidade\": \"Rio de Janeiro\",\r\n        \"estado\": \"RJ\",\r\n        \"cep\": \"20000-000\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/usuarios",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"usuarios"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:8080/usuarios/2/senha",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"usuarios",
-						"2",
-						"senha"
-					]
+				{
+					"name": "inserir usuário - Erro parametros Endereço",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cpf\": \"987.654.321-22\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura123!\",\r\n\t\"endereco\":{\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/usuarios",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inserir usuário - Erro Email invalido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cpf\": \"987.654.321-22\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura123!\",\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/usuarios",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inserir usuário - Erro Senha Invalida",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cpf\": \"987.654.321-22\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senha2345\",\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/usuarios",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inserir usuário - Erro CPF Invalido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cpf\": \"987654321\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura123!\",\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/usuarios",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inserir usuário - Erro CPF caracter Invalido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cpf\": \"987.acv.$32-22\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura123!\",\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/usuarios",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inserir usuário - Erro Nome Invalido - Numeros",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cpf\": \"987.654.321-22\",\r\n\t\"nome\": \"Maria Silva 3256 %$*(*!\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura123!\",\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/usuarios",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar usuário - Erro Usuário não existente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_HOST}}/usuarios/74",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"usuarios",
+								"74"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletar usuário - Erro Usuário não existente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_HOST}}/usuarios/432",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"usuarios",
+								"432"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualizar usuário - Erro validação de campos",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cpf\": \"987654321\",\r\n\t\"nome\": \"Maria Silva3123\",\r\n\t\"email\": \"maria.silva@\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"a!\",\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/usuarios/2",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"usuarios",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualizar senha - Erro Requisitos",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"novaSenha\": \"senhaSegur\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/usuarios/1/senha",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"usuarios",
+								"1",
+								"senha"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "autenticar usuário - Erro Usuario Incorreto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"mariasilva.br-ERROR\",\r\n\t\"senha\": \"senhaSegura1236!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/login",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "autenticar usuário - Erro Senha Incorreta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/login",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"description": "Conjunto de requisições para testar os status de erro e a validação de entrada de dados."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
 		},
 		{
-			"name": "autenticar usuário",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura1236!\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/login",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"login"
-					]
-				}
-			},
-			"response": []
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "LOCAL_HOST",
+			"value": "http://localhost:8080",
+			"type": "string"
 		}
 	]
 }
