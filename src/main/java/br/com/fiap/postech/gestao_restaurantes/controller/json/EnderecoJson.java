@@ -1,9 +1,8 @@
 package br.com.fiap.postech.gestao_restaurantes.controller.json;
 
 import br.com.fiap.postech.gestao_restaurantes.domain.Endereco;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Digits;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;

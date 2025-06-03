@@ -99,9 +99,16 @@ public class UsuarioJpaGateway implements UsuarioGateway {
     @Transactional
 	public void atualizar(Long id, Usuario usuario) {
     	try {
+    		Optional<UsuarioEntity> usuarioEntity = usuarioRepository.findById(id);
+    		
+			if (!usuarioEntity.isPresent()) {
+				throw new UsuarioNaoEncontradoException();
+			}
+    		        
 	        UsuarioEntity novoUsuario = mapToEntity(usuario);
 	        novoUsuario.setId(id); 
 	        novoUsuario.setDataUltimaAlteracao(LocalDateTime.now());
+	        novoUsuario.getEndereco().setId(usuarioEntity.get().getEndereco().getId());
 	        
 	        enderecoRepository.save(novoUsuario.getEndereco());
 	        usuarioRepository.save(novoUsuario);

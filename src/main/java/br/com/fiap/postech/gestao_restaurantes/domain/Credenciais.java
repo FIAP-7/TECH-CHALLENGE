@@ -1,6 +1,5 @@
 package br.com.fiap.postech.gestao_restaurantes.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
