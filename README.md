@@ -114,3 +114,10 @@ Este repositório está disponível publicamente para avaliação:
 ## 📚 Créditos
 
 Projeto desenvolvido para o **Tech Challenge FIAP** como parte da entrega da fase.
+
+Autores:
+- [@FMTSL - Felipe Matos](https://github.com/FMTSL)
+- [@MichaelPBarroso - Michael Barroso](https://github.com/MichaelPBarroso)
+- [@gustavoleite - Gustavo Leite](https://github.com/gustavoleite)
+- [@JefHerc - Jeferson Matos](https://github.com/JefHerc)
+- [@kellycps - Kelly](https://github.com/kellycps)
