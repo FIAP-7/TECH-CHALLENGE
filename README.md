@@ -21,26 +21,24 @@ Tipos de usuários:
 
 ## 🧰 Tecnologias Utilizadas
 
-- Java 17+
+- Java 21+
 - Spring Boot
 - Spring Data JPA
-- Spring Security
 - PostgreSQL
 - Docker & Docker Compose
 - Lombok
-- JWT (para autenticação)
-- Insomnia (para testes de API)
+- Postman (para testes de API)
 
 ---
 
 ## 📦 Estrutura do Projeto
 
-- `controller/`: Camada de exposição dos endpoints
-- `service/`: Lógica de negócio
-- `repository/`: Interface de acesso ao banco de dados
-- `model/`: Entidades da aplicação
-- `dto/`: Objetos de transferência de dados
 - `config/`: Configurações gerais (segurança, CORS, etc.)
+- `controller/`: Camada de exposição dos endpoints
+- `domain/`: Entidades da aplicação
+- `exception/`: Especificação dos erros e excessões do sistema
+- `gateway/`: Abstração que prove a camada de dados independente da origem 
+- `usecase/`: Lógica de negócio
 
 ---
 
@@ -48,21 +46,24 @@ Tipos de usuários:
 
 | Método | Endpoint          | Descrição                        |
 |--------|-------------------|----------------------------------|
-| POST   | /auth/register     | Cadastro de novo usuário         |
-| POST   | /auth/login        | Validação de login               |
-| PUT    | /user/{id}         | Atualização de dados do usuário |
-| PUT    | /user/{id}/password| Troca de senha do usuário       |
-
+| GET    | /usuarios/{id}     | Buscar usuário por ID         |
+| PUT    | /usuarios/{id}     | Atualiza dados do usuário         |
+| DELETE    | /usuarios/{id}     | Deletar usuário         |
+| POST    | /usuarios/     | Criar novo usuário         |
+| PATCH    | /usuario//{id}/senha     | Atualizar senha do usuário         |
+| POST    | /login     | Autenticar usuário         |
 ---
 
 ## 🗃️ Campos do Usuário
 
+- `id` (Long)
+- `cpf` (String)
 - `nome` (String)
 - `email` (String)
 - `login` (String)
 - `senha` (String - criptografada)
 - `dataUltimaAlteracao` (Date)
-- `endereco` (String)
+- `endereco` (Endereco)
 - `tipoUsuario` (Enum: CLIENTE, RESTAURANTE)
 
 ---
@@ -89,7 +90,7 @@ http://localhost:8080
 
 ## 🔍 Testes de API
 
-Utilize a [collection do Postman](./postman_collection.json) disponível no repositório para testar todos os endpoints da aplicação.
+Utilize a [collection do Postman](./documentacao/postaman-collections/Tech-Challenge.postman_collection.json) disponível no repositório para testar todos os endpoints da aplicação.
 
 ---
 
