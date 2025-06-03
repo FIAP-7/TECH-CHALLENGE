@@ -28,6 +28,8 @@ public class UsuarioEntity {
 
     private String senha;
 
+    private Integer tipoUsuario;
+
     private LocalDateTime dataUltimaAlteracao;
 
     @ManyToOne
