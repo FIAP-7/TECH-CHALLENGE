@@ -59,8 +59,9 @@ public class UsuarioController {
                     content = @Content(schema = @Schema(implementation = ExceptionJson.class))
             )
     })
-    public Long criar(@Valid @RequestBody UsuarioJson usuarioJson) {
-        return criarUsuarioUsecase.criar(usuarioJson.mapToDomain());
+    public ResponseEntity<Void> criar(@Valid @RequestBody UsuarioJson usuarioJson) {
+        criarUsuarioUsecase.criar(usuarioJson.mapToDomain());
+        return ResponseEntity.status(201).build();
     }
 
     @DeleteMapping("/{id}")
