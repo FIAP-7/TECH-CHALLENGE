@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"cpf\": \"987.654.321-22\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura123!\",\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
+							"raw": "{\r\n\t\"cpf\": \"987.654.321-22\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura123!\",\r\n    \"tipoUsuario\": 0,\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -60,7 +60,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"cpf\": \"987.654.321-22\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura1236!\",\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
+							"raw": "{\r\n\t\"cpf\": \"987.654.321-22\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura1236!\",\r\n    \"tipoUsuario\": 1,\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -191,7 +191,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"cpf\": \"987.654.321-22\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura123!\",\r\n\t\"endereco\":{\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\"\r\n\t}\r\n}",
+							"raw": "{\r\n\t\"cpf\": \"987.654.321-22\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura123!\",\r\n    \"tipoUsuario\": 0,\r\n\t\"endereco\":{\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\"\r\n\t}\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -217,7 +217,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"cpf\": \"987.654.321-22\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura123!\",\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
+							"raw": "{\r\n\t\"cpf\": \"987.654.321-22\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura123!\",\r\n    \"tipoUsuario\": 0,\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -243,7 +243,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"cpf\": \"987.654.321-22\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senha2345\",\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
+							"raw": "{\r\n\t\"cpf\": \"987.654.321-22\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senha2345\",\r\n    \"tipoUsuario\": 0,\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -269,7 +269,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"cpf\": \"987654321\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura123!\",\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
+							"raw": "{\r\n\t\"cpf\": \"987654321\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura123!\",\r\n    \"tipoUsuario\": 0,\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -295,7 +295,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"cpf\": \"987.acv.$32-22\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura123!\",\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
+							"raw": "{\r\n\t\"cpf\": \"987.acv.$32-22\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura123!\",\r\n    \"tipoUsuario\": 0,\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -322,6 +322,84 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n\t\"cpf\": \"987.654.321-22\",\r\n\t\"nome\": \"Maria Silva 3256 %$*(*!\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura123!\",\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/usuarios",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inserir usuário - Erro Tipo usuário Invalido - Valor negativo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cpf\": \"987.654.321-22\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura123!\",\r\n    \"tipoUsuario\": -1,\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/usuarios",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inserir usuário - Erro Tipo usuário Invalido - Valor Inexistente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cpf\": \"987.654.321-22\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura123!\",\r\n    \"tipoUsuario\": 8,\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/usuarios",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inserir usuário - Erro Tipo usuário Invalido - Não informado",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cpf\": \"987.654.321-22\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura123!\",\r\n    \"tipoUsuario\": \"\",\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -383,7 +461,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"cpf\": \"987654321\",\r\n\t\"nome\": \"Maria Silva3123\",\r\n\t\"email\": \"maria.silva@\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"a!\",\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
+							"raw": "{\r\n\t\"cpf\": \"987654321\",\r\n\t\"nome\": \"Maria Silva3123\",\r\n\t\"email\": \"maria.silva@\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"a!\",\r\n    \"tipoUsuario\": 7,\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-000\"\r\n\t}\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

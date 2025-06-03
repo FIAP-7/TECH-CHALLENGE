@@ -3,6 +3,7 @@ package br.com.fiap.postech.gestao_restaurantes.gateway.database.jpa;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import br.com.fiap.postech.gestao_restaurantes.domain.enumeration.TipoUsuarioEnum;
 import org.springframework.stereotype.Component;
 
 import br.com.fiap.postech.gestao_restaurantes.domain.Endereco;
@@ -147,6 +148,7 @@ public class UsuarioJpaGateway implements UsuarioGateway {
                 usuarioEntity.getLogin(),
                 usuarioEntity.getSenha(),
                 usuarioEntity.getDataUltimaAlteracao(),
+                TipoUsuarioEnum.getTipoUsuario(usuarioEntity.getTipoUsuario()),
                 endereco
         );
     }
@@ -160,6 +162,7 @@ public class UsuarioJpaGateway implements UsuarioGateway {
                 .email(usuario.getEmail())
                 .login(usuario.getLogin())
                 .senha(usuario.getSenha())
+                .tipoUsuario(usuario.getTipoUsuario().getId())
                 .build();
 
         EnderecoEntity enderecoEntity = EnderecoEntity.builder()
