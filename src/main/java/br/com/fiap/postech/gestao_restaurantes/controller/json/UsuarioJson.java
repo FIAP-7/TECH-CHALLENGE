@@ -53,6 +53,8 @@ public class UsuarioJson {
     @Valid
     private EnderecoJson endereco;
 
+    private LocalDateTime dataUltimaAlteracao;
+
     public Usuario mapToDomain(){
         return new Usuario(
                 id,

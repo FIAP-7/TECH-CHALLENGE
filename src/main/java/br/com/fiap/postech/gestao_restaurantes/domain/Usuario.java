@@ -1,5 +1,7 @@
 package br.com.fiap.postech.gestao_restaurantes.domain;
 
+import br.com.fiap.postech.gestao_restaurantes.controller.json.EnderecoJson;
+import br.com.fiap.postech.gestao_restaurantes.controller.json.UsuarioJson;
 import br.com.fiap.postech.gestao_restaurantes.domain.enumeration.TipoUsuarioEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,5 +22,28 @@ public class Usuario {
     private TipoUsuarioEnum tipoUsuario;
     private Endereco endereco;
 
+    public UsuarioJson mapToJson(){
+        EnderecoJson enderecoJson = new EnderecoJson(
+                endereco.getId(),
+                endereco.getLogradouro(),
+                endereco.getNumero(),
+                endereco.getComplemento(),
+                endereco.getBairro(),
+                endereco.getCidade(),
+                endereco.getEstado(),
+                endereco.getCep()
+        );
 
+        return new UsuarioJson(
+                id,
+                cpf,
+                nome,
+                email,
+                login,
+                senha,
+                tipoUsuario.getId(),
+                enderecoJson,
+                dataUltimaAlteracao
+        );
+    }
 }
