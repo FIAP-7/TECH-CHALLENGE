@@ -22,7 +22,7 @@ public class UsuarioJson {
 
     @NotBlank
     @Schema(description = "CPF do usuário", example = "123.456.789-00", required = true)
-    @Size(min = 11, max = 11, message = "CPF necessita de 11 caracteres")
+    @Pattern(regexp = "^\\d{3}.\\d{3}.\\d{3}-\\d{2}", message = "CPF necessita de 14 caracteres no formato (123.456.789-00)")
     private String cpf;
 
     @NotBlank
