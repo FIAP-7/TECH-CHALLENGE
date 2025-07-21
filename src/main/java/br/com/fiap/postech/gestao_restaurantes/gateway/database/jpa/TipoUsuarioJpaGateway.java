@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import br.com.fiap.postech.gestao_restaurantes.domain.TipoUsuario;
 import br.com.fiap.postech.gestao_restaurantes.exception.ErroAoAcessarRepositorioException;
 import br.com.fiap.postech.gestao_restaurantes.exception.TipoUsuarioNaoEncontradoException;
+import br.com.fiap.postech.gestao_restaurantes.exception.TipoUsuarioUtilizadoException;
 import br.com.fiap.postech.gestao_restaurantes.gateway.TipoUsuarioGateway;
 import br.com.fiap.postech.gestao_restaurantes.gateway.database.jpa.entity.TipoUsuarioEntity;
 import br.com.fiap.postech.gestao_restaurantes.gateway.database.jpa.repository.TipoUsuarioRepository;
@@ -30,7 +31,6 @@ public class TipoUsuarioJpaGateway implements TipoUsuarioGateway {
             return tipoUsuarioRepository.save(tipoUsuarioEntity).getId();
 
         }catch (Exception e){
-        	System.out.println("Erro ao criar tipo de usuário: " + e.getMessage());
             log.error(e.getMessage());
             throw new ErroAoAcessarRepositorioException();
         }
@@ -43,6 +43,10 @@ public class TipoUsuarioJpaGateway implements TipoUsuarioGateway {
     	
         if (!tipoUsuarioById.isPresent()) {
             throw new TipoUsuarioNaoEncontradoException();
+        }
+        
+        if (tipoUsuarioRepository.isTipoUsuarioInUse(id)) {
+            throw new TipoUsuarioUtilizadoException();
         }
         
         tipoUsuarioRepository.deleteById(id);
