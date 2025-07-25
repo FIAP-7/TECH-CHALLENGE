@@ -3,15 +3,16 @@ package br.com.fiap.postech.gestao_restaurantes.gateway.database.jpa;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import br.com.fiap.postech.gestao_restaurantes.domain.enumeration.TipoUsuarioEnum;
 import org.springframework.stereotype.Component;
 
 import br.com.fiap.postech.gestao_restaurantes.domain.Endereco;
+import br.com.fiap.postech.gestao_restaurantes.domain.TipoUsuario;
 import br.com.fiap.postech.gestao_restaurantes.domain.Usuario;
 import br.com.fiap.postech.gestao_restaurantes.exception.ErroAoAcessarRepositorioException;
 import br.com.fiap.postech.gestao_restaurantes.exception.UsuarioNaoEncontradoException;
 import br.com.fiap.postech.gestao_restaurantes.gateway.UsuarioGateway;
 import br.com.fiap.postech.gestao_restaurantes.gateway.database.jpa.entity.EnderecoEntity;
+import br.com.fiap.postech.gestao_restaurantes.gateway.database.jpa.entity.TipoUsuarioEntity;
 import br.com.fiap.postech.gestao_restaurantes.gateway.database.jpa.entity.UsuarioEntity;
 import br.com.fiap.postech.gestao_restaurantes.gateway.database.jpa.repository.EnderecoRepository;
 import br.com.fiap.postech.gestao_restaurantes.gateway.database.jpa.repository.UsuarioRepository;
@@ -139,6 +140,12 @@ public class UsuarioJpaGateway implements UsuarioGateway {
                 usuarioEntity.getEndereco().getEstado(),
                 usuarioEntity.getEndereco().getCep()
         );
+        
+		TipoUsuario tipoUsuario = new TipoUsuario(
+				usuarioEntity.getTipoUsuario().getId(),
+				usuarioEntity.getTipoUsuario().getNome()
+		);
+		
 
         return new Usuario(
                 usuarioEntity.getId(),
@@ -148,7 +155,7 @@ public class UsuarioJpaGateway implements UsuarioGateway {
                 usuarioEntity.getLogin(),
                 usuarioEntity.getSenha(),
                 usuarioEntity.getDataUltimaAlteracao(),
-                TipoUsuarioEnum.getTipoUsuario(usuarioEntity.getTipoUsuario()),
+                tipoUsuario,
                 endereco
         );
     }
@@ -162,9 +169,13 @@ public class UsuarioJpaGateway implements UsuarioGateway {
                 .email(usuario.getEmail())
                 .login(usuario.getLogin())
                 .senha(usuario.getSenha())
-                .tipoUsuario(usuario.getTipoUsuario().getId())
                 .build();
 
+		TipoUsuarioEntity tipoUsuarioEntity = TipoUsuarioEntity.builder()
+				.id(usuario.getTipoUsuario().getId())
+				.nome(usuario.getTipoUsuario().getNome())
+				.build();
+        
         EnderecoEntity enderecoEntity = EnderecoEntity.builder()
                 .id(usuario.getEndereco().getId())
                 .logradouro(usuario.getEndereco().getLogradouro())
@@ -176,6 +187,7 @@ public class UsuarioJpaGateway implements UsuarioGateway {
                 .cep(usuario.getEndereco().getCep())
                 .build();
 
+        usuarioEntity.setTipoUsuario(tipoUsuarioEntity);
         usuarioEntity.setEndereco(enderecoEntity);
 
         return usuarioEntity;

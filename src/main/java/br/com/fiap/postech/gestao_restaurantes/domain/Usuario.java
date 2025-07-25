@@ -1,12 +1,12 @@
 package br.com.fiap.postech.gestao_restaurantes.domain;
 
+import java.time.LocalDateTime;
+
 import br.com.fiap.postech.gestao_restaurantes.controller.json.EnderecoJson;
+import br.com.fiap.postech.gestao_restaurantes.controller.json.TipoUsuarioJson;
 import br.com.fiap.postech.gestao_restaurantes.controller.json.UsuarioJson;
-import br.com.fiap.postech.gestao_restaurantes.domain.enumeration.TipoUsuarioEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
@@ -19,7 +19,7 @@ public class Usuario {
     private String login;
     private String senha;
     private LocalDateTime dataUltimaAlteracao;
-    private TipoUsuarioEnum tipoUsuario;
+    private TipoUsuario tipoUsuario;
     private Endereco endereco;
 
     public UsuarioJson mapToJson(){
@@ -33,6 +33,11 @@ public class Usuario {
                 endereco.getEstado(),
                 endereco.getCep()
         );
+        
+		TipoUsuarioJson tipoUsuarioJson = new TipoUsuarioJson(
+				tipoUsuario.getId(), 
+				tipoUsuario.getNome()
+		);
 
         return new UsuarioJson(
                 id,
@@ -41,7 +46,7 @@ public class Usuario {
                 email,
                 login,
                 senha,
-                tipoUsuario.getId(),
+                tipoUsuarioJson,
                 enderecoJson,
                 dataUltimaAlteracao
         );

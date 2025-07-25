@@ -1,16 +1,19 @@
 package br.com.fiap.postech.gestao_restaurantes.controller.json;
 
 
+import java.time.LocalDateTime;
+
 import br.com.fiap.postech.gestao_restaurantes.domain.Usuario;
-import br.com.fiap.postech.gestao_restaurantes.domain.enumeration.TipoUsuarioEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
@@ -45,9 +48,8 @@ public class UsuarioJson {
     private String senha;
 
     @NotNull
-    @PositiveOrZero(message = "Código do tipo de usuário invalido")
-    @Schema(description = "Tipo de usuário, 0 para usuário que for o dono e 1 para o cliente ", example = "1", required = true)
-    private Integer tipoUsuario;
+    @Schema(description = "Tipo de usuário", required = true)
+    private TipoUsuarioJson tipoUsuario;
 
     @Schema(description = "Endereço do usuário")
     @Valid
@@ -64,7 +66,7 @@ public class UsuarioJson {
                 login,
                 senha,
                 LocalDateTime.now(),
-                TipoUsuarioEnum.getTipoUsuario(tipoUsuario),
+                tipoUsuario.mapToDomain(),
                 endereco.mapToDomain()
         );
     }
