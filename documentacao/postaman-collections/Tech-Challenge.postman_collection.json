@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "ac926ee0-da8f-4824-8ffe-67493dd81c6e",
+		"_postman_id": "613501a5-a4b3-4e1b-9ea7-4b61434dfd78",
 		"name": "Tech-Challenge",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "44932961"
+		"_exporter_id": "15617156"
 	},
 	"item": [
 		{
@@ -36,6 +36,32 @@
 					"response": []
 				},
 				{
+					"name": "inserir tipo usuário",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"nome\": \"Proprietário\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/tipo_usuario",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"tipo_usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "buscar usuário",
 					"request": {
 						"method": "GET",
@@ -47,6 +73,36 @@
 							],
 							"path": [
 								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar tipo usuário",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/tipo_usuario/1",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"tipo_usuario",
 								"1"
 							]
 						}
@@ -74,6 +130,33 @@
 							],
 							"path": [
 								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualizar tipo usuário",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"nome\": \"Dono\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/tipo_usuario/1",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"tipo_usuario",
 								"1"
 							]
 						}
@@ -151,6 +234,24 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "deletar tipo usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_HOST}}/tipo_usuario/1",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"tipo_usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"description": "Conjuto de requisições para testar o status com sucesso."
@@ -179,6 +280,58 @@
 							],
 							"path": [
 								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inserir tipo usuário - Erro nome vazio",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/tipo_usuario",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"tipo_usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inserir tipo usuário - Erro nome já utilizado",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\":\"Proprietário\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/tipo_usuario",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"tipo_usuario"
 							]
 						}
 					},
@@ -437,6 +590,24 @@
 					"response": []
 				},
 				{
+					"name": "buscar tipo usuário - Erro Tipo Usuário não existente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_HOST}}/tipo_usuario/100",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"tipo_usuario",
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "deletar usuário - Erro Usuário não existente",
 					"request": {
 						"method": "DELETE",
@@ -449,6 +620,24 @@
 							"path": [
 								"usuarios",
 								"432"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletar tipo usuário - Erro Tipo Usuário não existente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_HOST}}/tipo_usuario/100",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"tipo_usuario",
+								"100"
 							]
 						}
 					},
@@ -475,6 +664,33 @@
 							],
 							"path": [
 								"usuarios",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualizar tipo usuário - Erro Tipo validação de campos",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"nome\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/tipo_usuario/2",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"tipo_usuario",
 								"2"
 							]
 						}
