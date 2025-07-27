@@ -5,6 +5,7 @@ import br.com.fiap.postech.gestao_restaurantes.core.entities.TipoUsuario;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.TipoUsuarioNaoEncontradoException;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.ITipoUsuarioGateway;
 import br.com.fiap.postech.gestao_restaurantes.core.presenters.TipoUsuarioPresenter;
+import br.com.fiap.postech.gestao_restaurantes.core.usecase.tipoUsuario.handler.TipoUsuarioExistenteHandler;
 
 import java.util.Optional;
 
@@ -27,19 +28,16 @@ public class AtualizarTipoUsuarioUseCase {
 			throw new TipoUsuarioNaoEncontradoException();
 		}
 
-		//validaRegras(id, tipoUsuario);
-
 		TipoUsuario tipoUsuario = TipoUsuarioPresenter.toEntity(tipoUsuarioDTO);
 
-		tipoUsuarioGateway.atualizar(id, tipoUsuario);
+		validaRegras(tipoUsuario);
+
+		this.tipoUsuarioGateway.atualizar(id, tipoUsuario);
 	}
 
-	/*
-	private void validaRegras(Long id, TipoUsuario tipoUsuario) {
-		var inputTipoUsuarioDto = new InputTipoUsuarioDto(tipoUsuario);
-		rules.forEach(rule -> rule.validate(id, inputTipoUsuarioDto));
-		rulesTipoUsuario.forEach(rule -> rule.validate(inputTipoUsuarioDto));
-	}
+	private Boolean validaRegras(TipoUsuario tipoUsuario) {
+		var tipoUsuarioExistenteHander = new TipoUsuarioExistenteHandler(this.tipoUsuarioGateway);
 
-	 */
+		return tipoUsuarioExistenteHander.handle(tipoUsuario);
+	}
 }
