@@ -56,33 +56,31 @@ public class UsuarioGateway implements IUsuarioGateway {
     public void atualizar(Long id, Usuario usuario) {
         UsuarioDTO usuarioDTO = this.dataSource.buscarPorId(id);
 
-        if (usuarioDTO == null) {
-            throw new UsuarioNaoEncontradoException();
+        if (usuarioDTO != null) {
+            this.dataSource.atualizar(id, UsuarioPresenter.toDTO(usuario));
         }
-
-        this.dataSource.atualizar(id, UsuarioPresenter.toDTO(usuario));
     }
 
     @Override
     public void atualizarSenha(Long id, String novaSenha) {
         final UsuarioDTO usuarioDTO = this.dataSource.buscarPorId(id);
 
-        Usuario usuario = getUsuario(usuarioDTO);
+        if(usuarioDTO != null) {
+            Usuario usuario = getUsuario(usuarioDTO);
 
-        usuario.setSenha(novaSenha);
+            usuario.setSenha(novaSenha);
 
-        this.dataSource.atualizarSenha(id, usuario.getSenha());
+            this.dataSource.atualizarSenha(id, usuario.getSenha());
+        }
     }
 
     @Override
     public void deletar(Long id) {
         UsuarioDTO usuarioDTO = this.dataSource.buscarPorId(id);
 
-        if (usuarioDTO == null) {
-            throw new UsuarioNaoEncontradoException();
+        if (usuarioDTO != null) {
+            this.dataSource.deletar(id);
         }
-
-        this.dataSource.deletar(id);
     }
 
 
