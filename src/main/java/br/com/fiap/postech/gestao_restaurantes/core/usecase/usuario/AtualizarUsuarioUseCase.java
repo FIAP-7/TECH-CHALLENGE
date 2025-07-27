@@ -47,7 +47,7 @@ public class AtualizarUsuarioUseCase {
 		);
 
 		Usuario usuario = Usuario.create(
-				usuarioDTO.id(),
+				id,
 				usuarioDTO.cpf(),
 				usuarioDTO.nome(),
 				usuarioDTO.email(),
