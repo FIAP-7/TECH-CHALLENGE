@@ -39,14 +39,12 @@ public class UsuarioRepositoryImpl implements IUsuarioDataSource {
         try {
             Optional<UsuarioEntity> usuarioEntity = usuarioRepository.findById(id);
 
-            if (!usuarioEntity.isPresent()) {
-                throw new UsuarioNaoEncontradoException();
+            if (usuarioEntity.isPresent()) {
+                usuarioEntity.get().setDataUltimaAlteracao(LocalDateTime.now());
+                usuarioEntity.get().setSenha(novaSenha);
+
+                usuarioRepository.save(usuarioEntity.get());
             }
-
-            usuarioEntity.get().setDataUltimaAlteracao(LocalDateTime.now());
-            usuarioEntity.get().setSenha(novaSenha);
-
-            usuarioRepository.save(usuarioEntity.get());
         }catch (Exception e){
             log.error(e.getMessage());
             throw new ErroAoAcessarRepositorioException();
@@ -58,19 +56,17 @@ public class UsuarioRepositoryImpl implements IUsuarioDataSource {
         try {
             Optional<UsuarioEntity> usuarioEntity = usuarioRepository.findById(id);
 
-            if (!usuarioEntity.isPresent()) {
-                throw new UsuarioNaoEncontradoException();
+            if (usuarioEntity.isPresent()) {
+                UsuarioEntity novoUsuario = mapToEntity(usuario);
+                novoUsuario.setId(id);
+                novoUsuario.setDataUltimaAlteracao(LocalDateTime.now());
+                novoUsuario.getEndereco().setId(usuarioEntity.get().getEndereco().getId());
+
+                enderecoRepository.save(novoUsuario.getEndereco());
+                usuarioRepository.save(novoUsuario);
+
+                log.info("Usuário atualizado com sucesso: ID={}", id);
             }
-
-            UsuarioEntity novoUsuario = mapToEntity(usuario);
-            novoUsuario.setId(id);
-            novoUsuario.setDataUltimaAlteracao(LocalDateTime.now());
-            novoUsuario.getEndereco().setId(usuarioEntity.get().getEndereco().getId());
-
-            enderecoRepository.save(novoUsuario.getEndereco());
-            usuarioRepository.save(novoUsuario);
-
-            log.info("Usuário atualizado com sucesso: ID={}", id);
         }catch (Exception e){
             log.error(e.getMessage());
             throw new ErroAoAcessarRepositorioException();
@@ -82,15 +78,15 @@ public class UsuarioRepositoryImpl implements IUsuarioDataSource {
     public void deletar(Long id) {
         Optional<UsuarioEntity> usuarioById = usuarioRepository.findById(id);
 
-        if (usuarioById.isEmpty()) {
-            throw new UsuarioNaoEncontradoException();
+        if(usuarioById.isPresent()) {
+            EnderecoEntity endereco = usuarioById.get().getEndereco();
+
+            //TODO: Verificar se não deveria estar em um especifico para endereco
+            enderecoRepository.deleteById(endereco.getId());
+            usuarioRepository.deleteById(id);
+
+            log.info("Usuário deletado com sucesso: ID={}", id);
         }
-
-        //TODO: Verificar se não deveria estar em um especifico para endereco
-        enderecoRepository.deleteById(usuarioById.get().getEndereco().getId());
-        usuarioRepository.deleteById(id);
-
-        log.info("Usuário deletado com sucesso: ID={}", id);
     }
 
     @Override
