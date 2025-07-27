@@ -16,10 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.postech.gestao_restaurantes.infra.controller.json.TipoUsuarioJson;
-import br.com.fiap.postech.gestao_restaurantes.core.usecase.tipoUsuario.AtualizarTipoUsuarioUseCase;
-import br.com.fiap.postech.gestao_restaurantes.core.usecase.tipoUsuario.ConsultarTipoUsuarioUseCase;
-import br.com.fiap.postech.gestao_restaurantes.core.usecase.tipoUsuario.CriarTipoUsuarioUseCase;
-import br.com.fiap.postech.gestao_restaurantes.core.usecase.tipoUsuario.DeletarTipoUsuarioUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

@@ -2,12 +2,8 @@ package br.com.fiap.postech.gestao_restaurantes.core.usecase.tipoUsuario;
 
 import br.com.fiap.postech.gestao_restaurantes.core.dto.TipoUsuarioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.entities.TipoUsuario;
-import br.com.fiap.postech.gestao_restaurantes.core.exception.TipoUsuarioNaoEncontradoException;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.ITipoUsuarioGateway;
-import br.com.fiap.postech.gestao_restaurantes.core.presenters.TipoUsuarioPresenter;
 import br.com.fiap.postech.gestao_restaurantes.core.usecase.tipoUsuario.handler.TipoUsuarioExistenteHandler;
-
-import java.util.Optional;
 
 public class AtualizarTipoUsuarioUseCase {
 

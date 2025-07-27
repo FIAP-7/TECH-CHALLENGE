@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fiap.postech.gestao_restaurantes.core.usecase.validarLogin.AutenticarUsuarioUsecase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 

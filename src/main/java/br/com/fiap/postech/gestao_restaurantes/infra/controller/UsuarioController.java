@@ -26,9 +26,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fiap.postech.gestao_restaurantes.core.usecase.usuario.AtualizarSenhaUsuarioUseCase;
-import br.com.fiap.postech.gestao_restaurantes.core.usecase.usuario.AtualizarUsuarioUseCase;
-import br.com.fiap.postech.gestao_restaurantes.core.usecase.usuario.DeletarUsuarioUsecase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
