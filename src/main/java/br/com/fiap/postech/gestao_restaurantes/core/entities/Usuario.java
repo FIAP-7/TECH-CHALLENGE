@@ -45,7 +45,7 @@ public class Usuario {
 
         Matcher matcher = compile.matcher(cpf);
 
-        if (matcher.find()) {
+        if (!matcher.find()) {
             throw new CpfUsuarioInvalidoException();
         }
     }
