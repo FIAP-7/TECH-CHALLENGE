@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 
 import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoUsuarioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.UsuarioDTO;
-import br.com.fiap.postech.gestao_restaurantes.infra.domain.Usuario;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;

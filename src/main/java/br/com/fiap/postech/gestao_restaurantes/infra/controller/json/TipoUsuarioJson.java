@@ -2,7 +2,6 @@ package br.com.fiap.postech.gestao_restaurantes.infra.controller.json;
 
 import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoTipoUsuarioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.TipoUsuarioDTO;
-import br.com.fiap.postech.gestao_restaurantes.infra.domain.TipoUsuario;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -20,13 +19,6 @@ public class TipoUsuarioJson {
 	@NotBlank
     @Schema(description = "Nome do tipo", example = "Proprietário")
 	private String nome;
-	
-	public TipoUsuario mapToDomain(){
-        return new TipoUsuario(
-                id,
-                nome
-        );
-    }
 
 	public TipoUsuarioDTO mapToDTO(){
 		return new TipoUsuarioDTO(
