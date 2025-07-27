@@ -6,8 +6,11 @@ import br.com.fiap.postech.gestao_restaurantes.core.entities.Usuario;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.EnderecoNaoEncontradoException;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.TipoUsuarioNaoEncontradoException;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.UsuarioNaoEncontradoException;
+import br.com.fiap.postech.gestao_restaurantes.core.gateway.TipoUsuarioGateway;
 import br.com.fiap.postech.gestao_restaurantes.core.gateway.UsuarioGateway;
+import br.com.fiap.postech.gestao_restaurantes.core.interfaces.datasource.ITipoUsuarioDataSource;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.datasource.IUsuarioDataSource;
+import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.ITipoUsuarioGateway;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.IUsuarioGateway;
 import br.com.fiap.postech.gestao_restaurantes.core.presenters.UsuarioPresenter;
 import br.com.fiap.postech.gestao_restaurantes.core.usecase.usuario.*;
@@ -15,18 +18,22 @@ import br.com.fiap.postech.gestao_restaurantes.core.usecase.usuario.*;
 public class UsuarioCoreController {
 
     private final IUsuarioDataSource dataSource;
+    private final ITipoUsuarioDataSource tipoUsuarioDataSource;
 
-    private UsuarioCoreController(IUsuarioDataSource dataSource) {
+    private UsuarioCoreController(IUsuarioDataSource dataSource, ITipoUsuarioDataSource tipoUsuarioDataSource) {
         this.dataSource = dataSource;
+        this.tipoUsuarioDataSource = tipoUsuarioDataSource;
     }
 
-    public static UsuarioCoreController create(IUsuarioDataSource dataSource) {
-        return new UsuarioCoreController(dataSource);
+    public static UsuarioCoreController create(IUsuarioDataSource dataSource, ITipoUsuarioDataSource tipoUsuarioDataSource) {
+        return new UsuarioCoreController(dataSource, tipoUsuarioDataSource);
     }
 
     public UsuarioDTO incluir(NovoUsuarioDTO novoUsuarioDTO) {
         IUsuarioGateway usuarioGateway = UsuarioGateway.create(this.dataSource);
-        CriarUsuarioUsecase criarUsuarioUsecase = CriarUsuarioUsecase.create(usuarioGateway);
+        ITipoUsuarioGateway tipoUsuarioGateway = TipoUsuarioGateway.create(this.tipoUsuarioDataSource);
+
+        CriarUsuarioUsecase criarUsuarioUsecase = CriarUsuarioUsecase.create(usuarioGateway, tipoUsuarioGateway);
 
         Long idUsuario = criarUsuarioUsecase.executar(novoUsuarioDTO);
 
@@ -48,7 +55,9 @@ public class UsuarioCoreController {
 
     public UsuarioDTO alterar(Long id, UsuarioDTO usuarioDTO) {
         IUsuarioGateway usuarioGateway = UsuarioGateway.create(this.dataSource);
-        AtualizarUsuarioUseCase atualizarUsuarioUseCase = AtualizarUsuarioUseCase.create(usuarioGateway);
+        ITipoUsuarioGateway tipoUsuarioGateway = TipoUsuarioGateway.create(this.tipoUsuarioDataSource);
+
+        AtualizarUsuarioUseCase atualizarUsuarioUseCase = AtualizarUsuarioUseCase.create(usuarioGateway, tipoUsuarioGateway);
 
         atualizarUsuarioUseCase.executar(id, usuarioDTO);
 

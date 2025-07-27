@@ -1,23 +1,28 @@
 package br.com.fiap.postech.gestao_restaurantes.core.usecase.usuario;
 
+import br.com.fiap.postech.gestao_restaurantes.core.dto.EnderecoDTO;
+import br.com.fiap.postech.gestao_restaurantes.core.dto.TipoUsuarioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.UsuarioDTO;
+import br.com.fiap.postech.gestao_restaurantes.core.entities.Endereco;
+import br.com.fiap.postech.gestao_restaurantes.core.entities.TipoUsuario;
 import br.com.fiap.postech.gestao_restaurantes.core.entities.Usuario;
+import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.ITipoUsuarioGateway;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.IUsuarioGateway;
-
-
-import br.com.fiap.postech.gestao_restaurantes.core.presenters.UsuarioPresenter;
-
+import br.com.fiap.postech.gestao_restaurantes.core.usecase.usuario.handler.CadastroExistenteHandler;
+import br.com.fiap.postech.gestao_restaurantes.core.usecase.usuario.handler.UsuarioTipoUsuarioExistenteHandler;
 
 public class AtualizarUsuarioUseCase {
 
 	private final IUsuarioGateway usuarioGateway;
+	private final ITipoUsuarioGateway tipoUsuarioGateway;
 
-	private AtualizarUsuarioUseCase(IUsuarioGateway usuarioGateway) {
+	private AtualizarUsuarioUseCase(IUsuarioGateway usuarioGateway, ITipoUsuarioGateway tipoUsuarioGateway) {
 		this.usuarioGateway = usuarioGateway;
+		this.tipoUsuarioGateway = tipoUsuarioGateway;
 	}
 
-	public static AtualizarUsuarioUseCase create(IUsuarioGateway usuarioGateway) {
-		return new AtualizarUsuarioUseCase(usuarioGateway);
+	public static AtualizarUsuarioUseCase create(IUsuarioGateway usuarioGateway, ITipoUsuarioGateway tipoUsuarioGateway) {
+		return new AtualizarUsuarioUseCase(usuarioGateway, tipoUsuarioGateway);
 	}
 
 	public void executar(Long id, UsuarioDTO usuarioDTO) {
@@ -53,15 +58,17 @@ public class AtualizarUsuarioUseCase {
 				endereco
 		);
 
+		validaRegras(usuario);
 
 		usuarioGateway.atualizar(id, usuario);
 	}
 
-	/*
-	private void validaRegras(Long id, Usuario usuario) {
-		var inputDto = new InputDto(usuario);
-		//rules.forEach(rule -> rule.validate(id, inputDto));
-		//rulesUsuario.forEach(rule -> rule.validate(inputDto));
+	private Boolean validaRegras(Usuario usuario) {
+		var cadastroExistente = new CadastroExistenteHandler(usuarioGateway);
+		var usuarioTipoUsuarioExistenteHandler = new UsuarioTipoUsuarioExistenteHandler(tipoUsuarioGateway);
+
+		cadastroExistente.setNext(usuarioTipoUsuarioExistenteHandler);
+
+		return cadastroExistente.handle(usuario);
 	}
-	 */
 }

@@ -23,6 +23,6 @@ public class DeletarUsuarioUsecase {
             throw new UsuarioNaoEncontradoException();
         }
 
-        this.usuarioGateway.deletar(usuario.getId());
+        this.usuarioGateway.deletar(id);
     }
 }

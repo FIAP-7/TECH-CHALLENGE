@@ -7,7 +7,7 @@ import br.com.fiap.postech.gestao_restaurantes.core.dto.UsuarioDTO;
 import br.com.fiap.postech.gestao_restaurantes.infra.controller.json.ExceptionJson;
 import br.com.fiap.postech.gestao_restaurantes.infra.controller.json.NovaSenhaJson;
 import br.com.fiap.postech.gestao_restaurantes.infra.controller.json.UsuarioJson;
-import br.com.fiap.postech.gestao_restaurantes.infra.domain.Usuario;
+import br.com.fiap.postech.gestao_restaurantes.infra.repositories.TipoUsuarioRepositoryImpl;
 import br.com.fiap.postech.gestao_restaurantes.infra.repositories.UsuarioRepositoryImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -39,6 +39,7 @@ import lombok.RequiredArgsConstructor;
 public class UsuarioController {
 
     private final UsuarioRepositoryImpl usuarioRepository;
+    private final TipoUsuarioRepositoryImpl tipoUsuarioRepository;
 
     @PostMapping
     @Operation(summary = "Criar novo usuário", description = "Cria um novo usuário no sistema.")
@@ -56,7 +57,7 @@ public class UsuarioController {
             )
     })
     public ResponseEntity<Void> criar(@Valid @RequestBody UsuarioJson usuarioJson) {
-        UsuarioCoreController usuarioController = UsuarioCoreController.create(usuarioRepository);
+        UsuarioCoreController usuarioController = UsuarioCoreController.create(usuarioRepository, tipoUsuarioRepository);
 
         NovoUsuarioDTO novoUsuarioDTO = usuarioJson.mapToNovoUsuarioDTO();
 
@@ -73,7 +74,7 @@ public class UsuarioController {
                     content = @Content(schema = @Schema(implementation = ExceptionJson.class)))
     })
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        UsuarioCoreController usuarioController = UsuarioCoreController.create(usuarioRepository);
+        UsuarioCoreController usuarioController = UsuarioCoreController.create(usuarioRepository, tipoUsuarioRepository);
 
         usuarioController.excluir(id);
 
@@ -90,7 +91,7 @@ public class UsuarioController {
                     content = @Content(schema = @Schema(implementation = ExceptionJson.class)))
     })
     public ResponseEntity<Void> atualizarSenha(@PathVariable Long id, @Valid @RequestBody NovaSenhaJson novaSenhaJson) {
-        UsuarioCoreController usuarioController = UsuarioCoreController.create(usuarioRepository);
+        UsuarioCoreController usuarioController = UsuarioCoreController.create(usuarioRepository, tipoUsuarioRepository);
 
         usuarioController.alterarSenha(id, novaSenhaJson.getNovaSenha());
 
@@ -106,7 +107,7 @@ public class UsuarioController {
     })
     //TODO: Verificar se vai manter como UsuarioDTO ou vai trocar para o usuarioJson
     public ResponseEntity<UsuarioDTO> getUsuarioById(@PathVariable Long id){
-        UsuarioCoreController usuarioController = UsuarioCoreController.create(usuarioRepository);
+        UsuarioCoreController usuarioController = UsuarioCoreController.create(usuarioRepository, tipoUsuarioRepository);
 
         UsuarioDTO usuarioDTO = usuarioController.buscarPorId(id);
 
@@ -126,7 +127,7 @@ public class UsuarioController {
                     content = @Content(schema = @Schema(implementation = ExceptionJson.class)))
     })
     public ResponseEntity<UsuarioJson> atualizarUsuario(@PathVariable Long id,@Valid @RequestBody UsuarioJson usuarioJson){
-        UsuarioCoreController usuarioController = UsuarioCoreController.create(usuarioRepository);
+        UsuarioCoreController usuarioController = UsuarioCoreController.create(usuarioRepository, tipoUsuarioRepository);
 
         UsuarioDTO usuarioDTO = usuarioJson.mapToUsuarioDTO();
         usuarioController.alterar(id, usuarioDTO);
