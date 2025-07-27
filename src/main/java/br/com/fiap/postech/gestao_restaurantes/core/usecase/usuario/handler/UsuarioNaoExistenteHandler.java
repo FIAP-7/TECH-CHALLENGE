@@ -4,6 +4,8 @@ import br.com.fiap.postech.gestao_restaurantes.core.entities.Usuario;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.UsuarioExistenteException;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.IUsuarioGateway;
 
+import java.util.Optional;
+
 
 public class UsuarioNaoExistenteHandler extends UsuarioHandler {
 
@@ -15,9 +17,16 @@ public class UsuarioNaoExistenteHandler extends UsuarioHandler {
 
     @Override
     public Boolean handle(Usuario usuario) {
-        usuarioGateway.buscarPorLogin(usuario.getLogin())
-                .orElseThrow(UsuarioExistenteException::new);
+        Optional<Usuario> usuarioExistente = usuarioGateway.buscarPorLogin(usuario.getLogin());
 
-        return next.handle(usuario);
+        if (usuarioExistente.isPresent()) {
+            throw new UsuarioExistenteException();
+        }
+
+        if(next != null){
+            return next.handle(usuario);
+        } else {
+            return true;
+        }
     }
 }

@@ -21,6 +21,10 @@ public class CadastroExistenteHandler extends UsuarioHandler{
             throw new UsuarioNaoEncontradoException();
         }
 
-        return next.handle(usuario);
+        if(next != null){
+            return next.handle(usuario);
+        } else {
+            return true;
+        }
     }
 }

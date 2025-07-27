@@ -22,6 +22,10 @@ public class UsuarioTipoUsuarioExistenteHandler extends UsuarioHandler {
 
         tipoUsuarioGateway.buscarPorId(usuario.getTipoUsuario().getId()).orElseThrow(TipoUsuarioNaoEncontradoException::new);
 
-        return next.handle(usuario);
+        if(next != null){
+            return next.handle(usuario);
+        } else {
+            return true;
+        }
     }
 }

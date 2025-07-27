@@ -1,6 +1,7 @@
 package br.com.fiap.postech.gestao_restaurantes.core.usecase.tipoUsuario.handler;
 
 import br.com.fiap.postech.gestao_restaurantes.core.entities.TipoUsuario;
+import br.com.fiap.postech.gestao_restaurantes.core.exception.TipoUsuarioNaoEncontradoException;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.UsuarioNaoEncontradoException;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.ITipoUsuarioGateway;
 
@@ -17,8 +18,12 @@ public class TipoUsuarioExistenteHandler extends TipoUsuarioHandler {
     @Override
     public Boolean handle(TipoUsuario tipoUsuario) {
         tipoUsuarioGateway.buscarPorId(tipoUsuario.getId())
-                .orElseThrow(UsuarioNaoEncontradoException::new);
+                .orElseThrow(TipoUsuarioNaoEncontradoException::new);
 
-        return next.handle(tipoUsuario);
+        if(next != null){
+            return next.handle(tipoUsuario);
+        } else {
+            return true;
+        }
     }
 }

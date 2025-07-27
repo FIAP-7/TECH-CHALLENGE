@@ -17,6 +17,10 @@ public class PasswordValidaHandler extends PasswordHandler {
 
         usuario.setSenha(novaSenha);
 
-        return next.handle(id, novaSenha);
+        if(next != null){
+            return next.handle(id, novaSenha);
+        } else {
+            return true;
+        }
     }
 }

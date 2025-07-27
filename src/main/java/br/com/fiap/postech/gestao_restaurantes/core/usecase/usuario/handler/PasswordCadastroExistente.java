@@ -20,6 +20,10 @@ public class PasswordCadastroExistente extends PasswordHandler {
             throw new UsuarioNaoEncontradoException();
         }
 
-        return next.handle(id, novaSenha);
+        if(next != null){
+            return next.handle(id, novaSenha);
+        } else {
+            return true;
+        }
     }
 }
