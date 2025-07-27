@@ -1,6 +1,7 @@
 package br.com.fiap.postech.gestao_restaurantes.core.entities;
 
 import br.com.fiap.postech.gestao_restaurantes.core.exception.CpfUsuarioInvalidoException;
+import br.com.fiap.postech.gestao_restaurantes.core.exception.EmailUsuarioInvalidoException;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.NomeUsuarioInvalidoException;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.SenhaFormatoInvalidoException;
 import lombok.EqualsAndHashCode;
@@ -35,7 +36,7 @@ public class Usuario {
         EmailValidator emailValidator = EmailValidator.getInstance();
 
         if(!emailValidator.isValid(email)){
-            throw new IllegalArgumentException("Endereco de email invalido");
+            throw new EmailUsuarioInvalidoException();
         }
     }
 
