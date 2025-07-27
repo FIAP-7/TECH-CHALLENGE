@@ -1,23 +1,43 @@
 package br.com.fiap.postech.gestao_restaurantes.core.entities;
 
+import br.com.fiap.postech.gestao_restaurantes.core.exception.CepInvalidoException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Getter
 @EqualsAndHashCode
 public class Endereco {
 
+    @Setter
     private Long id;
+    @Setter
     private String logradouro;
+    @Setter
     private String numero;
+    @Setter
     private String complemento;
+    @Setter
     private String bairro;
+    @Setter
     private String cidade;
+    @Setter
     private String estado;
     private String cep;
 
     private static void cepValido(String cep) {
         //Validacao CEP valido
+        Pattern compile = Pattern.compile("\\d{5}-\\d{3}");
+
+        Matcher matcher = compile.matcher(cep);
+
+        if (!matcher.find()) {
+            throw new CepInvalidoException();
+        }
+
     }
 
     public static Endereco create(String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String cep) throws IllegalArgumentException {
@@ -36,34 +56,6 @@ public class Endereco {
         endereco.setCep(cep);
 
         return endereco;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
     }
 
     public void setCep(String cep) {
