@@ -46,6 +46,10 @@ public class TipoUsuarioGateway implements ITipoUsuarioGateway {
     public Optional<TipoUsuario> buscarPorId(Long id) {
         Optional<TipoUsuarioDTO> tipoUsuarioDTO = this.datasource.buscarPorId(id);
 
+         if (tipoUsuarioDTO.isEmpty()) {
+            return Optional.empty();
+        }
+
         return tipoUsuarioDTO.map(TipoUsuarioPresenter::toEntity);
 
     }
@@ -54,16 +58,18 @@ public class TipoUsuarioGateway implements ITipoUsuarioGateway {
     public void atualizar(Long id, TipoUsuario tipoUsuario) {
         Optional<TipoUsuarioDTO> tipoUsuarioDTO = this.datasource.buscarPorId(id);
 
-        if (tipoUsuarioDTO.isEmpty()) {
-            throw new TipoUsuarioNaoEncontradoException();
+        if(tipoUsuarioDTO.isPresent()) {
+            this.datasource.atualizar(id, TipoUsuarioPresenter.toDTO(tipoUsuario));
         }
-
-        this.datasource.atualizar(id, TipoUsuarioPresenter.toDTO(tipoUsuario));
     }
 
     @Override
     public Optional<TipoUsuario> buscarPorNome(String nome) {
         Optional<TipoUsuarioDTO> tipoUsuarioDTO = this.datasource.buscarPorNome(nome);
+
+        if (tipoUsuarioDTO.isEmpty()) {
+            return Optional.empty();
+        }
 
         return tipoUsuarioDTO.map(TipoUsuarioPresenter::toEntity);
 
