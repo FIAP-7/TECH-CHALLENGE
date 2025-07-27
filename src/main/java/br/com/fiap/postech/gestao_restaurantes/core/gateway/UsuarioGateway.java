@@ -60,7 +60,7 @@ public class UsuarioGateway implements IUsuarioGateway {
             throw new UsuarioNaoEncontradoException();
         }
 
-        this.dataSource.atualizar(id, usuarioDTO);
+        this.dataSource.atualizar(id, UsuarioPresenter.toDTO(usuario));
     }
 
     @Override

@@ -58,7 +58,7 @@ public class TipoUsuarioGateway implements ITipoUsuarioGateway {
             throw new TipoUsuarioNaoEncontradoException();
         }
 
-        this.datasource.atualizar(id, tipoUsuarioDTO.get());
+        this.datasource.atualizar(id, TipoUsuarioPresenter.toDTO(tipoUsuario));
     }
 
     @Override
