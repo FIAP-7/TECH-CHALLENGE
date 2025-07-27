@@ -25,13 +25,7 @@ public class CriarTipoUsuarioUseCase {
     }
 
     public Long executar(NovoTipoUsuarioDTO novoTipoUsuarioDTO) {
-        Optional<TipoUsuario> tipoUsuario = this.tipoUsuarioGateway.buscarPorNome(novoTipoUsuarioDTO.nome());
-
-        if (tipoUsuario.isPresent()) {
-            throw new TipoUsuarioMesmoNomeExistenteException();
-        }
-
-        TipoUsuario entity = TipoUsuarioPresenter.toEntity(novoTipoUsuarioDTO);
+        TipoUsuario entity = TipoUsuario.create(novoTipoUsuarioDTO.nome());
 
         validaRegras(entity);
 

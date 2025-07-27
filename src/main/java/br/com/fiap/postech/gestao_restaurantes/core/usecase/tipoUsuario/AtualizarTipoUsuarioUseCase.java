@@ -22,13 +22,7 @@ public class AtualizarTipoUsuarioUseCase {
 	}
 
 	public void executar(Long id, TipoUsuarioDTO tipoUsuarioDTO) {
-		Optional<TipoUsuario> tipoUsuarioOptional = this.tipoUsuarioGateway.buscarPorId(id);
-
-		if(tipoUsuarioOptional.isEmpty()){
-			throw new TipoUsuarioNaoEncontradoException();
-		}
-
-		TipoUsuario tipoUsuario = TipoUsuarioPresenter.toEntity(tipoUsuarioDTO);
+		TipoUsuario tipoUsuario = TipoUsuario.create(id, tipoUsuarioDTO.nome());
 
 		validaRegras(tipoUsuario);
 
