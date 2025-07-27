@@ -21,9 +21,38 @@ public class AtualizarUsuarioUseCase {
 	}
 
 	public void executar(Long id, UsuarioDTO usuarioDTO) {
-		//validaRegras(id, usuario);
 
-		Usuario usuario = UsuarioPresenter.toEntity(usuarioDTO);
+		TipoUsuarioDTO tipoUsuarioDTO = usuarioDTO.tipoUsuario();
+
+		TipoUsuario tipoUsuario = TipoUsuario.create(
+				tipoUsuarioDTO.id(),
+				tipoUsuarioDTO.nome()
+		);
+
+		EnderecoDTO enderecoDTO = usuarioDTO.endereco();
+
+		Endereco endereco = Endereco.create(
+				enderecoDTO.logradouro(),
+				enderecoDTO.numero(),
+				enderecoDTO.complemento(),
+				enderecoDTO.bairro(),
+				enderecoDTO.cidade(),
+				enderecoDTO.estado(),
+				enderecoDTO.cep()
+		);
+
+		Usuario usuario = Usuario.create(
+				usuarioDTO.id(),
+				usuarioDTO.cpf(),
+				usuarioDTO.nome(),
+				usuarioDTO.email(),
+				usuarioDTO.login(),
+				usuarioDTO.senha(),
+				usuarioDTO.dataUltimaAlteracao(),
+				tipoUsuario,
+				endereco
+		);
+
 
 		usuarioGateway.atualizar(id, usuario);
 	}

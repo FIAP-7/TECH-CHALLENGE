@@ -36,20 +36,13 @@ public class CriarUsuarioUsecase {
 
         TipoUsuarioDTO tipoUsuarioDTO = novoUsuarioDTO.tipoUsuario();
 
-        TipoUsuario tipoUsuario = TipoUsuarioPresenter.toEntity(tipoUsuarioDTO);
-
-        /*
         TipoUsuario tipoUsuario = TipoUsuario.create(
                 tipoUsuarioDTO.id(),
                 tipoUsuarioDTO.nome()
         );
-        */
 
         EnderecoDTO enderecoDTO = novoUsuarioDTO.endereco();
 
-        Endereco endereco = EnderecoPresenter.toEntity(enderecoDTO);
-
-        /*
         Endereco endereco = Endereco.create(
                 enderecoDTO.logradouro(),
                 enderecoDTO.numero(),
@@ -60,11 +53,6 @@ public class CriarUsuarioUsecase {
                 enderecoDTO.cep()
         );
 
-         */
-
-        Usuario usuario = UsuarioPresenter.toEntity(novoUsuarioDTO, tipoUsuario, endereco);
-
-        /*
         Usuario usuario = Usuario.create(
                 novoUsuarioDTO.cpf(),
                 novoUsuarioDTO.nome(),
@@ -75,7 +63,7 @@ public class CriarUsuarioUsecase {
                 tipoUsuario,
                 endereco
         );
-         */
+
 
         return usuarioGateway.criar(usuario);
     }
