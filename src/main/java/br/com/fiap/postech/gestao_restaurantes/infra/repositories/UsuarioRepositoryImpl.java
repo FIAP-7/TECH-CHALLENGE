@@ -10,7 +10,6 @@ import br.com.fiap.postech.gestao_restaurantes.core.interfaces.datasource.IUsuar
 import br.com.fiap.postech.gestao_restaurantes.infra.persistence.entity.EnderecoEntity;
 import br.com.fiap.postech.gestao_restaurantes.infra.persistence.entity.TipoUsuarioEntity;
 import br.com.fiap.postech.gestao_restaurantes.infra.persistence.entity.UsuarioEntity;
-import br.com.fiap.postech.gestao_restaurantes.infra.persistence.repository.EnderecoJPARepository;
 import br.com.fiap.postech.gestao_restaurantes.infra.persistence.repository.UsuarioJPARepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,8 +24,6 @@ import java.util.Optional;
 public class UsuarioRepositoryImpl implements IUsuarioDataSource {
 
     private final UsuarioJPARepository usuarioRepository;
-
-    private final EnderecoJPARepository enderecoRepository;
 
     @Override
     public UsuarioDTO buscarPorId(Long id) {
@@ -62,7 +59,6 @@ public class UsuarioRepositoryImpl implements IUsuarioDataSource {
                 novoUsuario.setDataUltimaAlteracao(LocalDateTime.now());
                 novoUsuario.getEndereco().setId(usuarioEntity.get().getEndereco().getId());
 
-                enderecoRepository.save(novoUsuario.getEndereco());
                 usuarioRepository.save(novoUsuario);
 
                 log.info("Usuário atualizado com sucesso: ID={}", id);
@@ -79,10 +75,6 @@ public class UsuarioRepositoryImpl implements IUsuarioDataSource {
         Optional<UsuarioEntity> usuarioById = usuarioRepository.findById(id);
 
         if(usuarioById.isPresent()) {
-            EnderecoEntity endereco = usuarioById.get().getEndereco();
-
-            //TODO: Verificar se não deveria estar em um especifico para endereco
-            enderecoRepository.deleteById(endereco.getId());
             usuarioRepository.deleteById(id);
 
             log.info("Usuário deletado com sucesso: ID={}", id);
@@ -109,8 +101,6 @@ public class UsuarioRepositoryImpl implements IUsuarioDataSource {
             UsuarioEntity usuarioEntity = mapToEntity(usuario);
 
             usuarioEntity.setDataUltimaAlteracao(LocalDateTime.now());
-
-            enderecoRepository.save(usuarioEntity.getEndereco());
 
             return usuarioRepository.save(usuarioEntity).getId();
 

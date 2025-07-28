@@ -58,6 +58,25 @@ public class Endereco {
         return endereco;
     }
 
+    public static Endereco create(Long id, String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String cep) throws IllegalArgumentException {
+        if(logradouro == null || numero == null || complemento == null || bairro == null || cidade == null || estado == null || cep == null) {
+            throw new IllegalArgumentException("Faltam dados");
+        }
+
+        Endereco endereco = new Endereco();
+
+        endereco.setId(id);
+        endereco.setLogradouro(logradouro);
+        endereco.setNumero(numero);
+        endereco.setComplemento(complemento);
+        endereco.setBairro(bairro);
+        endereco.setCidade(cidade);
+        endereco.setEstado(estado);
+        endereco.setCep(cep);
+
+        return endereco;
+    }
+
     public void setCep(String cep) {
         cepValido(cep);
 

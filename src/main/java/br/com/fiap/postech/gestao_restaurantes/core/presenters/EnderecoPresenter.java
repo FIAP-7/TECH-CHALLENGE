@@ -21,6 +21,6 @@ public class EnderecoPresenter {
     }
 
     public static Endereco toEntity(EnderecoDTO enderecoDTO) {
-        return Endereco.create(enderecoDTO.logradouro(), enderecoDTO.numero(), enderecoDTO.complemento(), enderecoDTO.bairro(), enderecoDTO.cidade(), enderecoDTO.estado(), enderecoDTO.cep());
+        return Endereco.create(enderecoDTO.id(), enderecoDTO.logradouro(), enderecoDTO.numero(), enderecoDTO.complemento(), enderecoDTO.bairro(), enderecoDTO.cidade(), enderecoDTO.estado(), enderecoDTO.cep());
     }
 }
