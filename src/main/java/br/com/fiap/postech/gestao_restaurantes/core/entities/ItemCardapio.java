@@ -1,6 +1,9 @@
 package br.com.fiap.postech.gestao_restaurantes.core.entities;
 
-import br.com.fiap.postech.gestao_restaurantes.core.exception.FotoInvalidaException;
+import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardaptio.DescricaoItemCardapioInvalidoException;
+import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardaptio.FotoItemCardapioInvalidaException;
+import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardaptio.NomeItemCardapioInvalidoException;
+import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardaptio.PrecoItemCardapioInvalidoException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +13,7 @@ import java.util.regex.Pattern;
 
 @Getter
 @EqualsAndHashCode
-public class CardapioItem {
+public class ItemCardapio {
 
     @Setter
     private Long id;
@@ -23,19 +26,19 @@ public class CardapioItem {
 
     private static void validarNome(String nome) {
         if (nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome do item não pode ser vazio.");
+            throw new NomeItemCardapioInvalidoException();
         }
     }
 
     private static void validarDescricao(String descricao) {
         if (descricao == null || descricao.trim().isEmpty()) {
-            throw new IllegalArgumentException("Descrição do item não pode ser vazia.");
+            throw new DescricaoItemCardapioInvalidoException();
         }
     }
 
     private static void validarPreco(BigDecimal preco) {
         if (preco == null || preco.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("Preço deve ser maior que zero.");
+            throw new PrecoItemCardapioInvalidoException();
         }
     }
 
@@ -45,16 +48,16 @@ public class CardapioItem {
         Matcher matcher = fotoValidaPattern.matcher(foto);
 
         if (!matcher.matches()) {
-            throw new FotoInvalidaException();
+            throw new FotoItemCardapioInvalidaException();
         }
     }
 
-    public static CardapioItem create(String nome, String descricao, BigDecimal preco, boolean estaDisponivelApenasNoRestaurante, String foto) {
+    public static ItemCardapio create(String nome, String descricao, BigDecimal preco, boolean estaDisponivelApenasNoRestaurante, String foto) {
         validarNome(nome);
         validarDescricao(descricao);
         validarPreco(preco);
 
-        CardapioItem item = new CardapioItem();
+        ItemCardapio item = new ItemCardapio();
         item.setNome(nome);
         item.setDescricao(descricao);
         item.setPreco(preco);
@@ -64,12 +67,12 @@ public class CardapioItem {
         return item;
     }
 
-    public static CardapioItem create(Long id, String nome, String descricao, BigDecimal preco, boolean estaDisponivelApenasNoRestaurante, String foto) {
+    public static ItemCardapio create(Long id, String nome, String descricao, BigDecimal preco, boolean estaDisponivelApenasNoRestaurante, String foto) {
         validarNome(nome);
         validarDescricao(descricao);
         validarPreco(preco);
 
-        CardapioItem item = new CardapioItem();
+        ItemCardapio item = new ItemCardapio();
         item.setId(id);
         item.setNome(nome);
         item.setDescricao(descricao);
