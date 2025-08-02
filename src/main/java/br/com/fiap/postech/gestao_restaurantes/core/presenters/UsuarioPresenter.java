@@ -4,6 +4,7 @@ import br.com.fiap.postech.gestao_restaurantes.core.dto.EnderecoDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoUsuarioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.TipoUsuarioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.UsuarioDTO;
+import br.com.fiap.postech.gestao_restaurantes.core.dto.UsuarioRestauranteDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.entities.Endereco;
 import br.com.fiap.postech.gestao_restaurantes.core.entities.TipoUsuario;
 import br.com.fiap.postech.gestao_restaurantes.core.entities.Usuario;
@@ -48,7 +49,16 @@ public class UsuarioPresenter {
         return usuarioDTO;
     }
 
+    public static UsuarioRestauranteDTO toUsuarioRestauranteDTO(Usuario usuario) {
+    	UsuarioRestauranteDTO usuarioRestauranteDTO = new UsuarioRestauranteDTO(
+                usuario.getId(),
+                usuario.getNome()
+        );
 
+        return usuarioRestauranteDTO;
+    }
+    
+    
     public static Usuario toEntity(UsuarioDTO usuarioDTO, TipoUsuario tipoUsuario, Endereco endereco) {
         return Usuario.create(usuarioDTO.id(), usuarioDTO.cpf(), usuarioDTO.nome(), usuarioDTO.email(), usuarioDTO.login(), usuarioDTO.senha(), usuarioDTO.dataUltimaAlteracao(), tipoUsuario, endereco);
     }
@@ -64,5 +74,9 @@ public class UsuarioPresenter {
         Endereco endereco = EnderecoPresenter.toEntity(usuarioDTO.endereco());
 
         return Usuario.create(usuarioDTO.cpf(), usuarioDTO.nome(), usuarioDTO.email(), usuarioDTO.login(), usuarioDTO.senha(), usuarioDTO.dataUltimaAlteracao(), tipoUsuario, endereco);
+    }
+    
+    public static Usuario toEntity(UsuarioRestauranteDTO usuarioRestauranteDTO) {
+        return Usuario.create(usuarioRestauranteDTO.id(), usuarioRestauranteDTO.nome());
     }
 }

@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoUsuarioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.UsuarioDTO;
+import br.com.fiap.postech.gestao_restaurantes.core.dto.UsuarioRestauranteDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -84,5 +85,12 @@ public class UsuarioJson {
                 tipoUsuario.mapToDTO(),
                 endereco.mapToDTO()
         );
+    }
+    
+    public UsuarioRestauranteDTO mapToUsuarioRestauranteDTO(){
+        return new UsuarioRestauranteDTO(
+                id,
+                nome
+       );
     }
 }

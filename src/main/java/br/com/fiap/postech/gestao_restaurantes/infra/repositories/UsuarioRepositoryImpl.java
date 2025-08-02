@@ -1,11 +1,17 @@
 package br.com.fiap.postech.gestao_restaurantes.infra.repositories;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+
+import org.springframework.stereotype.Component;
+
 import br.com.fiap.postech.gestao_restaurantes.core.dto.EnderecoDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoUsuarioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.TipoUsuarioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.UsuarioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.ErroAoAcessarRepositorioException;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.UsuarioNaoEncontradoException;
+import br.com.fiap.postech.gestao_restaurantes.core.exception.UsuarioUtilizadoException;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.datasource.IUsuarioDataSource;
 import br.com.fiap.postech.gestao_restaurantes.infra.persistence.entity.EnderecoEntity;
 import br.com.fiap.postech.gestao_restaurantes.infra.persistence.entity.TipoUsuarioEntity;
@@ -13,10 +19,6 @@ import br.com.fiap.postech.gestao_restaurantes.infra.persistence.entity.UsuarioE
 import br.com.fiap.postech.gestao_restaurantes.infra.persistence.repository.UsuarioJPARepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
-
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Slf4j
 @Component
@@ -74,6 +76,10 @@ public class UsuarioRepositoryImpl implements IUsuarioDataSource {
     public void deletar(Long id) {
         Optional<UsuarioEntity> usuarioById = usuarioRepository.findById(id);
 
+        if (usuarioRepository.isUsuarioInUse(id)) {
+            throw new UsuarioUtilizadoException();
+        }
+        
         if(usuarioById.isPresent()) {
             usuarioRepository.deleteById(id);
 
