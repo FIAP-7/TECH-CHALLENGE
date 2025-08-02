@@ -56,7 +56,13 @@ public class ItemCardapioRepositoryImpl implements IItemCardapioDataSource {
 
     @Override
     public Optional<ItemCardapioDTO> buscarPorId(Long id) {
-        return Optional.empty();
+
+        return itemCardapioRepository.findById(id)
+                .map(this::mapToDomain)
+                .or(() -> {
+                    log.error("Item de cardápio não encontrado: ID={}", id);
+                    return Optional.empty();
+                });
     }
 
     @Override
