@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "435843a9-8456-401a-8654-bf3592725997",
+		"_postman_id": "31684032-a7a2-4f53-a230-ff60d5c5a183",
 		"name": "Tech-Challenge",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "44932961"
+		"_exporter_id": "15617156"
 	},
 	"item": [
 		{
@@ -30,6 +30,32 @@
 							],
 							"path": [
 								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inserir restaurante",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"nome\": \"MC Donalds\",\r\n\t\"tipoCozinha\": \"Fast food\",\r\n\t\"horarioFuncionamento\": \"Seg à sábado, das 09h às 22h\",\r\n    \"usuario\": {\r\n        \"id\": 1\r\n    },\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Ana Costa\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"\",\r\n\t\t\"bairro\": \"Gonzaga\",\r\n\t\t\"cidade\": \"Santos\",\r\n\t\t\"estado\": \"SP\",\r\n\t\t\"cep\": \"11086-100\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/restaurante",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"restaurante"
 							]
 						}
 					},
@@ -80,6 +106,24 @@
 					"response": []
 				},
 				{
+					"name": "buscar restaurante",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_HOST}}/restaurante/1",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"restaurante",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "buscar tipo usuário",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -116,7 +160,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"cpf\": \"987.654.321-44\",\r\n\t\"nome\": \"Maria Silva\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura1236!#\",\r\n    \"tipoUsuario\": {\r\n        \"id\": 1\r\n    },\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-123\"\r\n\t}\r\n}",
+							"raw": "{\r\n\t\"cpf\": \"987.654.321-44\",\r\n\t\"nome\": \"Maria Silva Atualizado\",\r\n\t\"email\": \"maria.silva@email.com\",\r\n\t\"login\": \"mariasilva.br\",\r\n\t\"senha\": \"senhaSegura1236!#\",\r\n    \"tipoUsuario\": {\r\n        \"id\": 1\r\n    },\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Brasil\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"apto 101\",\r\n\t\t\"bairro\": \"Centro\",\r\n\t\t\"cidade\": \"Rio de Janeiro\",\r\n\t\t\"estado\": \"RJ\",\r\n\t\t\"cep\": \"20000-123\"\r\n\t}\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -130,6 +174,33 @@
 							],
 							"path": [
 								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualizar restaurante",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"nome\": \"MC Donalds Unidade 2\",\r\n\t\"tipoCozinha\": \"Fast food\",\r\n\t\"horarioFuncionamento\": \"Seg à sábado, das 09h às 22h\",\r\n    \"usuario\": {\r\n        \"id\": 1\r\n    },\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Paulista\",\r\n\t\t\"numero\": \"222\",\r\n\t\t\"complemento\": \"\",\r\n\t\t\"bairro\": \"Gonzaga\",\r\n\t\t\"cidade\": \"Santos\",\r\n\t\t\"estado\": \"SP\",\r\n\t\t\"cep\": \"11086-100\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/restaurante/1",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"restaurante",
 								"1"
 							]
 						}
@@ -229,6 +300,24 @@
 							],
 							"path": [
 								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletar restaurante",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_HOST}}/restaurante/1",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"restaurante",
 								"1"
 							]
 						}
@@ -772,6 +861,173 @@
 							],
 							"path": [
 								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inserir restaurante - Erro usuário inexistente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"nome\": \"MC Donalds\",\r\n\t\"tipoCozinha\": \"Fast food\",\r\n\t\"horarioFuncionamento\": \"Seg à sábado, das 09h às 22h\",\r\n    \"usuario\": {\r\n        \"id\": 500\r\n    },\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Ana Costa\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"\",\r\n\t\t\"bairro\": \"Gonzaga\",\r\n\t\t\"cidade\": \"Santos\",\r\n\t\t\"estado\": \"SP\",\r\n\t\t\"cep\": \"11086-100\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/restaurante",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"restaurante"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inserir restaurante - Erro dados vazios",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"nome\": \"\",\r\n\t\"tipoCozinha\": \"\",\r\n\t\"horarioFuncionamento\": \"\",\r\n    \"usuario\": {\r\n        \"id\": 1\r\n    },\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Ana Costa\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"\",\r\n\t\t\"bairro\": \"Gonzaga\",\r\n\t\t\"cidade\": \"Santos\",\r\n\t\t\"estado\": \"SP\",\r\n\t\t\"cep\": \"11086-100\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/restaurante",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"restaurante"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inserir restaurante - Erro dados do endereço vazios",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"nome\": \"Burguer King\",\r\n\t\"tipoCozinha\": \"Fast food\",\r\n\t\"horarioFuncionamento\": \"Seg à sab das 9h às 22h\",\r\n    \"usuario\": {\r\n        \"id\": 1\r\n    },\r\n\t\"endereco\":{\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/restaurante",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"restaurante"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inserir restaurante - Erro nome já utilizado",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"nome\": \"MC Donalds\",\r\n\t\"tipoCozinha\": \"Fast food\",\r\n\t\"horarioFuncionamento\": \"Seg à sábado, das 09h às 22h\",\r\n    \"usuario\": {\r\n        \"id\": 1\r\n    },\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Ana Costa\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"\",\r\n\t\t\"bairro\": \"Gonzaga\",\r\n\t\t\"cidade\": \"Santos\",\r\n\t\t\"estado\": \"SP\",\r\n\t\t\"cep\": \"11086-100\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/restaurante",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"restaurante"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualizar restaurante - Erro validação dos campos",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"nome\": \"\",\r\n\t\"tipoCozinha\": \"\",\r\n\t\"horarioFuncionamento\": \"\",\r\n    \"usuario\": {\r\n        \"id\": 1\r\n    },\r\n\t\"endereco\":{\r\n\t\t\"logradouro\": \"Avenida Ana Costa\",\r\n\t\t\"numero\": \"1234\",\r\n\t\t\"complemento\": \"\",\r\n\t\t\"bairro\": \"Gonzaga\",\r\n\t\t\"cidade\": \"Santos\",\r\n\t\t\"estado\": \"SP\",\r\n\t\t\"cep\": \"11086-100\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_HOST}}/restaurante/1",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"restaurante",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletar restaurante - Erro Restaurante inexistente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_HOST}}/restaurante/100",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"restaurante",
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar restaurante - Erro restaurante não existe",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_HOST}}/restaurante/1000",
+							"host": [
+								"{{LOCAL_HOST}}"
+							],
+							"path": [
+								"restaurante",
+								"1000"
 							]
 						}
 					},
