@@ -1,81 +1,77 @@
 package br.com.fiap.postech.gestao_restaurantes.infra.controller;
 
-
-import br.com.fiap.postech.gestao_restaurantes.core.controller.TipoUsuarioCoreController;
-import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoTipoUsuarioDTO;
-import br.com.fiap.postech.gestao_restaurantes.core.dto.TipoUsuarioDTO;
-import br.com.fiap.postech.gestao_restaurantes.infra.repositories.TipoUsuarioRepositoryImpl;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import br.com.fiap.postech.gestao_restaurantes.infra.controller.json.TipoUsuarioJson;
+import br.com.fiap.postech.gestao_restaurantes.core.controller.ItemCardapioCoreController;
+import br.com.fiap.postech.gestao_restaurantes.core.dto.ItemCardapioDTO;
+import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoItemCardapioDTO;
+import br.com.fiap.postech.gestao_restaurantes.infra.controller.json.ItemCardapioJson;
+import br.com.fiap.postech.gestao_restaurantes.infra.repositories.ItemCardapioRepositoryImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("tipo_usuario")
+@RequestMapping("item-cardapio")
 @RequiredArgsConstructor
-@Tag(name = "Tipo usuário", description = "Endpoints para gerenciamento de tipo de usuário")
-public class TipoUsuarioController {
+@Tag(name = "Itens de cardápio", description = "Endpoints para gerenciamento dos itens de cardápio do restaurante.")
+public class ItemCardapioController {
 
-    private final TipoUsuarioRepositoryImpl tipoUsuarioRepository;
+    private final ItemCardapioRepositoryImpl itemCardapioRepository;
 
     @PostMapping
-    @Operation(summary = "Criar tipo usuário", description = "Cria um novo tipo de usuário no sistema.")
-    public ResponseEntity<Void> criar(@Valid @RequestBody TipoUsuarioJson tipoUsuarioJson) {
-        //criarTipoUsuarioUsecase.executar(tipoUsuarioJson.mapToDomain());
-        TipoUsuarioCoreController tipoUsuarioCoreController = TipoUsuarioCoreController.create(tipoUsuarioRepository);
+    @Operation(summary = "Criar item de cardápio", description = "Cria um novo item de cardápio no sistema.")
+    public ResponseEntity<Void> criar(@Valid @RequestBody ItemCardapioJson itemCardapioJson) {
+        ItemCardapioCoreController itemCardapioCoreController = ItemCardapioCoreController.create(itemCardapioRepository);
 
-        NovoTipoUsuarioDTO novoTipoUsuarioDTO = tipoUsuarioJson.mapToNovoTipoDTO();
-
-        tipoUsuarioCoreController.incluir(novoTipoUsuarioDTO);
+        NovoItemCardapioDTO novoItemCardapioDTO = itemCardapioJson.mapToNovoDTO();
+        itemCardapioCoreController.incluir(novoItemCardapioDTO);
 
         return ResponseEntity.status(201).build();
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Deletar tipo de usuário", description = "Remove um tipo de usuário do sistema com base no ID informado.")
+    @Operation(summary = "Deletar item de cardápio", description = "Remove um item de cardápio do sistema com base no ID informado.")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        //deletarTipoUsuarioUseCase.executar(id);]
-        TipoUsuarioCoreController tipoUsuarioCoreController = TipoUsuarioCoreController.create(tipoUsuarioRepository);
+        ItemCardapioCoreController itemCardapioCoreController = ItemCardapioCoreController.create(itemCardapioRepository);
 
-        tipoUsuarioCoreController.excluir(id);
+        itemCardapioCoreController.excluir(id);
 
         return ResponseEntity.noContent().build();
     }
-    
+
     @GetMapping("/{id}")
-    @Operation(summary = "Buscar tipo de usuário por ID", description = "Retorna os dados de um tipo de usuário a partir do seu ID.")
-    public ResponseEntity<TipoUsuarioJson> getTipoUsuarioById(@PathVariable Long id){
-//    	var tipoUsuario = consultarTipoUsuarioUseCase.executar(id);
-//        return tipoUsuario.map(value -> ResponseEntity.ok(value.mapToJson())).orElseGet(() -> ResponseEntity.ok(null));
+    @Operation(summary = "Buscar item de cardápio por ID", description = "Retorna os dados de um item de cardápio a partir do seu ID.")
+    public ResponseEntity<ItemCardapioJson> getItemCardapioById(@PathVariable Long id) {
+        ItemCardapioCoreController itemCardapioCoreController = ItemCardapioCoreController.create(itemCardapioRepository);
 
-        TipoUsuarioCoreController tipoUsuarioCoreController = TipoUsuarioCoreController.create(tipoUsuarioRepository);
-        TipoUsuarioDTO tipoUsuarioDTO = tipoUsuarioCoreController.buscarPorId(id);
+        ItemCardapioDTO itemCardapioDTO = itemCardapioCoreController.buscarPorId(id);
 
-        TipoUsuarioJson tipoUsuarioJson = new TipoUsuarioJson(tipoUsuarioDTO.id(), tipoUsuarioDTO.nome());
+        if (itemCardapioDTO == null) {
+            return ResponseEntity.notFound().build();
+        }
 
-        return ResponseEntity.ok(tipoUsuarioJson);
+        ItemCardapioJson itemCardapioJson = new ItemCardapioJson(
+                itemCardapioDTO.id(),
+                itemCardapioDTO.nome(),
+                itemCardapioDTO.descricao(),
+                itemCardapioDTO.preco(),
+                itemCardapioDTO.disponivelApenasNoRestaurante(),
+                itemCardapioDTO.foto()
+        );
+
+        return ResponseEntity.ok(itemCardapioJson);
     }
-    
+
     @PutMapping("/{id}")
-    @Operation(summary = "Atualizar dados do tipo de usuário", description = "Atualiza as informações de um tipo de usuário existente.")
-    public ResponseEntity<TipoUsuarioJson> atualizarTipoUsuario(@PathVariable Long id, @Valid @RequestBody TipoUsuarioJson tipoUsuarioJson){
-    	//atualizarTipoUsuarioUseCase.executar(id, tipoUsuarioJson.mapToDomain());
-        TipoUsuarioCoreController tipoUsuarioCoreController = TipoUsuarioCoreController.create(tipoUsuarioRepository);
+    @Operation(summary = "Atualizar dados do item de cardápio", description = "Atualiza as informações de um item de cardápio existente.")
+    public ResponseEntity<Void> atualizarItemCardapio(@PathVariable Long id, @Valid @RequestBody ItemCardapioJson itemCardapioJson) {
+        ItemCardapioCoreController itemCardapioCoreController = ItemCardapioCoreController.create(itemCardapioRepository);
 
-        TipoUsuarioDTO tipoUsuarioDTO = tipoUsuarioJson.mapToDTO();
-        tipoUsuarioCoreController.alterar(id, tipoUsuarioDTO);
+        ItemCardapioDTO itemCardapioDTO = itemCardapioJson.mapToDTO();
+        itemCardapioCoreController.alterar(id, itemCardapioDTO);
 
-    	return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent().build();
     }
 }
