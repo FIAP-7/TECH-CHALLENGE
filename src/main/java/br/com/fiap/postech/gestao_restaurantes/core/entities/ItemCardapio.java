@@ -21,7 +21,7 @@ public class ItemCardapio {
     private String descricao;
     private BigDecimal preco;
     @Setter
-    private boolean estaDisponivelApenasNoRestaurante;
+    private boolean disponivelApenasNoRestaurante;
     private String foto;
 
     private static void validarNome(String nome) {
@@ -52,7 +52,7 @@ public class ItemCardapio {
         }
     }
 
-    public static ItemCardapio create(String nome, String descricao, BigDecimal preco, boolean estaDisponivelApenasNoRestaurante, String foto) {
+    public static ItemCardapio create(String nome, String descricao, BigDecimal preco, boolean disponivelApenasNoRestaurante, String foto) {
         validarNome(nome);
         validarDescricao(descricao);
         validarPreco(preco);
@@ -61,13 +61,13 @@ public class ItemCardapio {
         item.setNome(nome);
         item.setDescricao(descricao);
         item.setPreco(preco);
-        item.setEstaDisponivelApenasNoRestaurante(estaDisponivelApenasNoRestaurante);
+        item.setDisponivelApenasNoRestaurante(disponivelApenasNoRestaurante);
         item.setFoto(foto);
 
         return item;
     }
 
-    public static ItemCardapio create(Long id, String nome, String descricao, BigDecimal preco, boolean estaDisponivelApenasNoRestaurante, String foto) {
+    public static ItemCardapio create(Long id, String nome, String descricao, BigDecimal preco, boolean disponivelApenasNoRestaurante, String foto) {
         validarNome(nome);
         validarDescricao(descricao);
         validarPreco(preco);
@@ -77,7 +77,7 @@ public class ItemCardapio {
         item.setNome(nome);
         item.setDescricao(descricao);
         item.setPreco(preco);
-        item.setEstaDisponivelApenasNoRestaurante(estaDisponivelApenasNoRestaurante);
+        item.setDisponivelApenasNoRestaurante(disponivelApenasNoRestaurante);
         item.setFoto(foto);
 
         return item;

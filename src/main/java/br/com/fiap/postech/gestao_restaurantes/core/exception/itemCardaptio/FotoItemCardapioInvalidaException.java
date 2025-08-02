@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 public class FotoItemCardapioInvalidaException extends SystemBaseException {
-    private final String code = "CardapioItem.fotoInvalida";
+    private final String code = "itemCardapio.fotoInvalida";
     private final String message = "URL da foto inválida.";
     private final Integer httpStatus = 401;
 }

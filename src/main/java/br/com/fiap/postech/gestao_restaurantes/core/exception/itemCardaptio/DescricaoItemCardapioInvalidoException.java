@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 public class DescricaoItemCardapioInvalidoException extends SystemBaseException {
-    private final String code = "ItemCardapio.descricaoInvalida";
+    private final String code = "itemCardapio.descricaoInvalida";
     private final String message = "Descrição do item não pode ser vazia.";
     private final Integer httpStatus = 400;
 }

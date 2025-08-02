@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 public class PrecoItemCardapioInvalidoException extends SystemBaseException {
-    private final String code = "ItemCardapio.precoInvalido";
+    private final String code = "itemCardapio.precoInvalido";
     private final String message = "Preço deve ser maior que zero.";
     private final Integer httpStatus = 400;
 }
