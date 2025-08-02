@@ -43,7 +43,7 @@ public class ItemCardapio {
     }
 
     private static void validarFoto(String foto) {
-        Pattern fotoValidaPattern = Pattern.compile("^(https?|ftp)://[a-zA-Z0-9\\-._~:/?#\\[\\]@!$&'()*+,;=]+\\.(jpg|jpeg|png|gif)$");
+        Pattern fotoValidaPattern = Pattern.compile("^(https?|ftp)://[a-zA-Z0-9\\-._~:/?#\\[\\]@!$&'()*+,;=]+\\.(jpg|jpeg|png|gif|webp)$");
 
         Matcher matcher = fotoValidaPattern.matcher(foto);
 
