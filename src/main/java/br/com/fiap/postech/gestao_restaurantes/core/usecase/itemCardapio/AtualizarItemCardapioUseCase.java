@@ -1,6 +1,6 @@
 package br.com.fiap.postech.gestao_restaurantes.core.usecase.itemCardapio;
 
-import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoItemCardapioDTO;
+import br.com.fiap.postech.gestao_restaurantes.core.dto.ItemCardapioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.entities.ItemCardapio;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardaptio.ItemCardapioNaoEncontradoException;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.IItemCardapioGateway;
@@ -19,14 +19,14 @@ public class AtualizarItemCardapioUseCase {
         return new AtualizarItemCardapioUseCase(itemCardapioGateway);
     }
 
-    public void executar(Long id, NovoItemCardapioDTO novoItemCardapioDTO) {
+    public void executar(Long id, ItemCardapioDTO itemCardapioDTO) {
         Optional<ItemCardapio> itemCardapio = itemCardapioGateway.buscarPorId(id);
 
         if (itemCardapio.isEmpty()) {
             throw new ItemCardapioNaoEncontradoException();
         }
 
-        ItemCardapio entity = ItemCardapio.create(id, novoItemCardapioDTO.nome(), novoItemCardapioDTO.descricao(), novoItemCardapioDTO.preco(), novoItemCardapioDTO.disponivelApenasNoRestaurante(), novoItemCardapioDTO.foto());
+        ItemCardapio entity = ItemCardapio.create(id, itemCardapioDTO.nome(), itemCardapioDTO.descricao(), itemCardapioDTO.preco(), itemCardapioDTO.disponivelApenasNoRestaurante(), itemCardapioDTO.foto());
 
         this.itemCardapioGateway.atualizar(id, entity);
     }

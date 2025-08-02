@@ -1,126 +1,101 @@
 package br.com.fiap.postech.gestao_restaurantes.infra.repositories;
 
-import java.util.Optional;
-
-import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoTipoUsuarioDTO;
-import br.com.fiap.postech.gestao_restaurantes.core.dto.TipoUsuarioDTO;
-import br.com.fiap.postech.gestao_restaurantes.core.interfaces.datasource.ITipoUsuarioDataSource;
-import org.springframework.stereotype.Component;
-
-import br.com.fiap.postech.gestao_restaurantes.core.exception.ErroAoAcessarRepositorioException;
-import br.com.fiap.postech.gestao_restaurantes.core.exception.TipoUsuarioNaoEncontradoException;
-import br.com.fiap.postech.gestao_restaurantes.core.exception.TipoUsuarioUtilizadoException;
-import br.com.fiap.postech.gestao_restaurantes.infra.persistence.entity.TipoUsuarioEntity;
-import br.com.fiap.postech.gestao_restaurantes.infra.persistence.repository.TipoUsuarioJPARepository;
-import jakarta.transaction.Transactional;
+import br.com.fiap.postech.gestao_restaurantes.core.dto.ItemCardapioDTO;
+import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoItemCardapioDTO;
+import br.com.fiap.postech.gestao_restaurantes.core.interfaces.datasource.IItemCardapioDataSource;
+import br.com.fiap.postech.gestao_restaurantes.infra.persistence.entity.ItemCardapioEntity;
+import br.com.fiap.postech.gestao_restaurantes.infra.persistence.repository.ItemCardapioJPARepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class TipoUsuarioRepositoryImpl implements ITipoUsuarioDataSource {
+public class ItemCardapioRepositoryImpl implements IItemCardapioDataSource {
 
-    private final TipoUsuarioJPARepository tipoUsuarioRepository;
+    private final ItemCardapioJPARepository itemCardapioRepository;
 
     @Override
-    @Transactional
-    public Long criar(NovoTipoUsuarioDTO novoTipoUsuarioDTO){
-        try{
-	        TipoUsuarioEntity tipoUsuarioEntity = mapToEntity(novoTipoUsuarioDTO);
-
-            return tipoUsuarioRepository.save(tipoUsuarioEntity).getId();
-
-        }catch (Exception e){
-            log.error(e.getMessage());
-            throw new ErroAoAcessarRepositorioException();
-        }
+    public Long criar(NovoItemCardapioDTO novoItemCardapio) {
+        ItemCardapioEntity itemCardapioEntity = mapToEntity(novoItemCardapio);
+        ItemCardapioEntity savedEntity = itemCardapioRepository.save(itemCardapioEntity);
+        return savedEntity.getId();
     }
 
     @Override
-    @Transactional
     public void deletar(Long id) {
-    	Optional<TipoUsuarioEntity> tipoUsuarioById = tipoUsuarioRepository.findById(id);
-    	
-        if (!tipoUsuarioById.isPresent()) {
-            throw new TipoUsuarioNaoEncontradoException();
+        Optional<ItemCardapioEntity> itemCardapioById = itemCardapioRepository.findById(id);
+
+        if (!itemCardapioById.isPresent()) {
+            log.error("Item de cardápio não encontrado: ID={}", id);
+            return;
         }
-        
-        if (tipoUsuarioRepository.isTipoUsuarioInUse(id)) {
-            throw new TipoUsuarioUtilizadoException();
-        }
-        
-        tipoUsuarioRepository.deleteById(id);
-        
-        log.info("Tipo usuário deletado com sucesso: ID={}", id);
+
+        itemCardapioRepository.deleteById(id);
+        log.info("Item de cardápio deletado com sucesso: ID={}", id);
     }
 
     @Override
-    @Transactional
-	public void atualizar(Long id, TipoUsuarioDTO tipoUsuarioDTO) {
-    	try {
-    		Optional<TipoUsuarioEntity> tipoUsuarioEntity = tipoUsuarioRepository.findById(id);
-    		
-			if (!tipoUsuarioEntity.isPresent()) {
-				throw new TipoUsuarioNaoEncontradoException();
-			}
-    		        
-	        TipoUsuarioEntity novoTipoUsuario = mapToEntity(tipoUsuarioDTO);
-	        novoTipoUsuario.setId(id); 
-	       
-	        tipoUsuarioRepository.save(novoTipoUsuario);
-	    }catch (Exception e){
-	        log.error(e.getMessage());
-	        throw new ErroAoAcessarRepositorioException();
-	    }
-	}
-	
-	@Override
-	public Optional<TipoUsuarioDTO> buscarPorId(Long id) {
-		var tipoUsuarioEntity = tipoUsuarioRepository.findById(id).orElseThrow(TipoUsuarioNaoEncontradoException::new);
-		
-		var tipoUsuario = mapToDomain(tipoUsuarioEntity);
-		return Optional.of(tipoUsuario);
-	}
-	
-	@Override
-	public Optional<TipoUsuarioDTO> buscarPorNome(String nome) {
-        Optional<TipoUsuarioEntity> tipoUsuarioEntityOptional = tipoUsuarioRepository.findByNome(nome);
+    public void atualizar(Long id, ItemCardapioDTO itemCardapio) {
+        Optional<ItemCardapioEntity> itemCardapioById = itemCardapioRepository.findById(id);
 
-        if(tipoUsuarioEntityOptional.isEmpty()){
-            log.info("Tipo de usuário não foi encontrado: Nome={}", nome);
-            return Optional.empty();
+        if (!itemCardapioById.isPresent()) {
+            log.error("Item de cardápio não encontrado: ID={}", id);
+            return;
         }
 
-        TipoUsuarioEntity tipoUsuarioEntity = tipoUsuarioEntityOptional.get();
+        ItemCardapioEntity updatedItem = mapToEntity(itemCardapio);
+        updatedItem.setId(id);
+        itemCardapioRepository.save(updatedItem);
 
-        TipoUsuarioDTO tipoUsuario = mapToDomain(tipoUsuarioEntity);
+        log.info("Item de cardápio atualizado com sucesso: ID={}", id);
+    }
 
-        return Optional.of(tipoUsuario);
-	}
-	
-    private TipoUsuarioDTO mapToDomain(TipoUsuarioEntity tipoUsuarioEntity){
-        return new TipoUsuarioDTO(
-        		tipoUsuarioEntity.getId(),
-                tipoUsuarioEntity.getNome()
+    @Override
+    public Optional<ItemCardapioDTO> buscarPorId(Long id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<ItemCardapioDTO> buscarPorRestaurante(Long idRestaurante) {
+        return Optional.empty();
+    }
+
+    private ItemCardapioDTO mapToDomain(ItemCardapioEntity itemCardapioEntity) {
+
+        return new ItemCardapioDTO(
+                itemCardapioEntity.getId(),
+                itemCardapioEntity.getNome(),
+                itemCardapioEntity.getDescricao(),
+                itemCardapioEntity.getPreco(),
+                itemCardapioEntity.getDisponivelApenasNoRestaurante(),
+                itemCardapioEntity.getFoto()
         );
     }
 
-    private TipoUsuarioEntity mapToEntity(TipoUsuarioDTO tipoUsuario){
-    	TipoUsuarioEntity tipoUsuarioEntity = TipoUsuarioEntity.builder()
-                .id(tipoUsuario.id())
-                .nome(tipoUsuario.nome())
-                .build();
+    private ItemCardapioEntity mapToEntity(ItemCardapioDTO itemCardapio) {
 
-        return tipoUsuarioEntity;
+        return ItemCardapioEntity.builder()
+                .id(itemCardapio.id())
+                .nome(itemCardapio.nome())
+                .descricao(itemCardapio.descricao())
+                .preco(itemCardapio.preco())
+                .disponivelApenasNoRestaurante(itemCardapio.disponivelApenasNoRestaurante())
+                .foto(itemCardapio.foto())
+                .build();
     }
 
-    private TipoUsuarioEntity mapToEntity(NovoTipoUsuarioDTO tipoUsuario){
-        TipoUsuarioEntity tipoUsuarioEntity = TipoUsuarioEntity.builder()
-                .nome(tipoUsuario.nome())
-                .build();
+    private ItemCardapioEntity mapToEntity(NovoItemCardapioDTO itemCardapio) {
 
-        return tipoUsuarioEntity;
+        return ItemCardapioEntity.builder()
+                .nome(itemCardapio.nome())
+                .descricao(itemCardapio.descricao())
+                .preco(itemCardapio.preco())
+                .disponivelApenasNoRestaurante(itemCardapio.disponivelApenasNoRestaurante())
+                .foto(itemCardapio.foto())
+                .build();
     }
-    
 }
