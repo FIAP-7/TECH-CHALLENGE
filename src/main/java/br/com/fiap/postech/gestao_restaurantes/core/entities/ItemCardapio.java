@@ -1,9 +1,9 @@
 package br.com.fiap.postech.gestao_restaurantes.core.entities;
 
-import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardaptio.DescricaoItemCardapioInvalidoException;
-import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardaptio.FotoItemCardapioInvalidaException;
-import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardaptio.NomeItemCardapioInvalidoException;
-import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardaptio.PrecoItemCardapioInvalidoException;
+import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardapio.DescricaoItemCardapioInvalidoException;
+import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardapio.FotoItemCardapioInvalidaException;
+import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardapio.NomeItemCardapioInvalidoException;
+import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardapio.PrecoItemCardapioInvalidoException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

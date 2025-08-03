@@ -3,7 +3,7 @@ package br.com.fiap.postech.gestao_restaurantes.core.controller;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.ItemCardapioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoItemCardapioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.entities.ItemCardapio;
-import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardaptio.ItemCardapioNaoEncontradoException;
+import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardapio.ItemCardapioNaoEncontradoException;
 import br.com.fiap.postech.gestao_restaurantes.core.gateway.ItemCardapioGateway;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.datasource.IItemCardapioDataSource;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.IItemCardapioGateway;
