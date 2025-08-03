@@ -8,7 +8,7 @@ public interface IItemCardapioGateway {
 
     Long criar(ItemCardapio usuario);
 
-    void atualizar(Long id, ItemCardapio usuario);
+    void atualizar(Long id, ItemCardapio itemCardapio);
 
     void deletar(Long id);
 

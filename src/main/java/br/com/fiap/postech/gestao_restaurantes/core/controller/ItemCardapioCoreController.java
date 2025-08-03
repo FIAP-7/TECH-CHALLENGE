@@ -3,9 +3,7 @@ package br.com.fiap.postech.gestao_restaurantes.core.controller;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.ItemCardapioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoItemCardapioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.entities.ItemCardapio;
-import br.com.fiap.postech.gestao_restaurantes.core.exception.EnderecoNaoEncontradoException;
-import br.com.fiap.postech.gestao_restaurantes.core.exception.TipoUsuarioNaoEncontradoException;
-import br.com.fiap.postech.gestao_restaurantes.core.exception.UsuarioNaoEncontradoException;
+import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardaptio.ItemCardapioNaoEncontradoException;
 import br.com.fiap.postech.gestao_restaurantes.core.gateway.ItemCardapioGateway;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.datasource.IItemCardapioDataSource;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.IItemCardapioGateway;
@@ -33,7 +31,7 @@ public class ItemCardapioCoreController {
 
         CriarItemCardapioUseCase criarItemCardapioUsecase = CriarItemCardapioUseCase.create(itemCardapioGateway);
 
-        Long idUsuario = criarItemCardapioUsecase.executar(novoItemCardapioDTO);
+        Long idItemCardapio = criarItemCardapioUsecase.executar(novoItemCardapioDTO);
 
         return null;
     }
@@ -46,26 +44,26 @@ public class ItemCardapioCoreController {
             ItemCardapio itemCardapio = consultarItemCardapioUseCase.executar(id);
 
             return ItemCardapioPresenter.toDTO(itemCardapio);
-        } catch (UsuarioNaoEncontradoException | EnderecoNaoEncontradoException | TipoUsuarioNaoEncontradoException e) {
+        } catch (ItemCardapioNaoEncontradoException e) {
             return null;
         }
     }
 
-    public ItemCardapioDTO alterar(Long id, ItemCardapioDTO usuarioDTO) {
+    public ItemCardapioDTO alterar(Long id, ItemCardapioDTO itemCardapioDTO) {
         IItemCardapioGateway itemCardapioGateway = ItemCardapioGateway.create(this.dataSource);
 
         AtualizarItemCardapioUseCase atualizarItemCardapioUseCase = AtualizarItemCardapioUseCase.create(itemCardapioGateway);
 
-        atualizarItemCardapioUseCase.executar(id, usuarioDTO);
+        atualizarItemCardapioUseCase.executar(id, itemCardapioDTO);
 
         return null;
     }
 
     public void excluir(Long id) {
         IItemCardapioGateway itemCardapioGateway = ItemCardapioGateway.create(this.dataSource);
-        DeletarItemCardapioUsecase deletarUsuarioUsecase = DeletarItemCardapioUsecase.create(itemCardapioGateway);
+        DeletarItemCardapioUsecase deletarItemCardapioUsecase = DeletarItemCardapioUsecase.create(itemCardapioGateway);
 
-        deletarUsuarioUsecase.executar(id);
+        deletarItemCardapioUsecase.executar(id);
     }
 
 }

@@ -34,8 +34,8 @@ public class ItemCardapioGateway implements IItemCardapioGateway {
     }
 
     @Override
-    public void atualizar(Long id, ItemCardapio tipoUsuario) {
-        this.datasource.atualizar(id, ItemCardapioPresenter.toDTO(tipoUsuario));
+    public void atualizar(Long id, ItemCardapio itemCardapio) {
+        this.datasource.atualizar(id, ItemCardapioPresenter.toDTO(itemCardapio));
     }
 
     @Override
