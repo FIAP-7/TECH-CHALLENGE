@@ -1,11 +1,10 @@
 package br.com.fiap.postech.gestao_restaurantes.core.controller;
 
+import java.util.Optional;
+
 import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoTipoUsuarioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.TipoUsuarioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.entities.TipoUsuario;
-import br.com.fiap.postech.gestao_restaurantes.core.exception.EnderecoNaoEncontradoException;
-import br.com.fiap.postech.gestao_restaurantes.core.exception.TipoUsuarioNaoEncontradoException;
-import br.com.fiap.postech.gestao_restaurantes.core.exception.UsuarioNaoEncontradoException;
 import br.com.fiap.postech.gestao_restaurantes.core.gateway.TipoUsuarioGateway;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.datasource.ITipoUsuarioDataSource;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.ITipoUsuarioGateway;
@@ -14,8 +13,6 @@ import br.com.fiap.postech.gestao_restaurantes.core.usecase.tipoUsuario.Atualiza
 import br.com.fiap.postech.gestao_restaurantes.core.usecase.tipoUsuario.ConsultarTipoUsuarioUseCase;
 import br.com.fiap.postech.gestao_restaurantes.core.usecase.tipoUsuario.CriarTipoUsuarioUseCase;
 import br.com.fiap.postech.gestao_restaurantes.core.usecase.tipoUsuario.DeletarTipoUsuarioUseCase;
-
-import java.util.Optional;
 
 public class TipoUsuarioCoreController {
 
@@ -42,14 +39,10 @@ public class TipoUsuarioCoreController {
         ITipoUsuarioGateway tipoUsuarioGateway = TipoUsuarioGateway.create(this.dataSource);
         ConsultarTipoUsuarioUseCase consultarTipoUsuarioUseCase = ConsultarTipoUsuarioUseCase.create(tipoUsuarioGateway);
 
-        try {
-            Optional<TipoUsuario> executar = consultarTipoUsuarioUseCase.executar(id);
+        Optional<TipoUsuario> executar = consultarTipoUsuarioUseCase.executar(id);
 
-            return executar.map(TipoUsuarioPresenter::toDTO).orElse(null);
+        return executar.map(TipoUsuarioPresenter::toDTO).orElse(null);
 
-        }catch (UsuarioNaoEncontradoException | EnderecoNaoEncontradoException | TipoUsuarioNaoEncontradoException e){
-            return null;
-        }
     }
 
     public TipoUsuarioDTO alterar(Long id, TipoUsuarioDTO tipoUsuarioDTO) {

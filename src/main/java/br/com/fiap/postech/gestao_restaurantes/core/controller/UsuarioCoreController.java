@@ -3,9 +3,6 @@ package br.com.fiap.postech.gestao_restaurantes.core.controller;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoUsuarioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.UsuarioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.entities.Usuario;
-import br.com.fiap.postech.gestao_restaurantes.core.exception.EnderecoNaoEncontradoException;
-import br.com.fiap.postech.gestao_restaurantes.core.exception.TipoUsuarioNaoEncontradoException;
-import br.com.fiap.postech.gestao_restaurantes.core.exception.UsuarioNaoEncontradoException;
 import br.com.fiap.postech.gestao_restaurantes.core.gateway.TipoUsuarioGateway;
 import br.com.fiap.postech.gestao_restaurantes.core.gateway.UsuarioGateway;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.datasource.ITipoUsuarioDataSource;
@@ -13,7 +10,11 @@ import br.com.fiap.postech.gestao_restaurantes.core.interfaces.datasource.IUsuar
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.ITipoUsuarioGateway;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.IUsuarioGateway;
 import br.com.fiap.postech.gestao_restaurantes.core.presenters.UsuarioPresenter;
-import br.com.fiap.postech.gestao_restaurantes.core.usecase.usuario.*;
+import br.com.fiap.postech.gestao_restaurantes.core.usecase.usuario.AtualizarSenhaUsuarioUseCase;
+import br.com.fiap.postech.gestao_restaurantes.core.usecase.usuario.AtualizarUsuarioUseCase;
+import br.com.fiap.postech.gestao_restaurantes.core.usecase.usuario.ConsultarUsuarioUseCase;
+import br.com.fiap.postech.gestao_restaurantes.core.usecase.usuario.CriarUsuarioUsecase;
+import br.com.fiap.postech.gestao_restaurantes.core.usecase.usuario.DeletarUsuarioUsecase;
 
 public class UsuarioCoreController {
 
@@ -35,7 +36,7 @@ public class UsuarioCoreController {
 
         CriarUsuarioUsecase criarUsuarioUsecase = CriarUsuarioUsecase.create(usuarioGateway, tipoUsuarioGateway);
 
-        Long idUsuario = criarUsuarioUsecase.executar(novoUsuarioDTO);
+        criarUsuarioUsecase.executar(novoUsuarioDTO);
 
         return null;
     }
@@ -44,15 +45,11 @@ public class UsuarioCoreController {
         IUsuarioGateway usuarioGateway = UsuarioGateway.create(this.dataSource);
         ConsultarUsuarioUseCase consultarUsuarioUseCase = ConsultarUsuarioUseCase.create(usuarioGateway);
 
-        try {
-            Usuario usuario = consultarUsuarioUseCase.executar(id);
+        Usuario usuario = consultarUsuarioUseCase.executar(id);
 
-            return UsuarioPresenter.toDTO(usuario);
-        }catch (UsuarioNaoEncontradoException | EnderecoNaoEncontradoException | TipoUsuarioNaoEncontradoException e){
-            return null;
-        }
+        return UsuarioPresenter.toDTO(usuario);
     }
-
+    
     public UsuarioDTO alterar(Long id, UsuarioDTO usuarioDTO) {
         IUsuarioGateway usuarioGateway = UsuarioGateway.create(this.dataSource);
         ITipoUsuarioGateway tipoUsuarioGateway = TipoUsuarioGateway.create(this.tipoUsuarioDataSource);
