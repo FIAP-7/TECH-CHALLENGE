@@ -16,6 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.HttpStatus;
 
 import br.com.fiap.postech.gestao_restaurantes.core.dto.TipoUsuarioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.entities.TipoUsuario;
@@ -74,7 +75,7 @@ class AtualizarTipoUsuarioUseCaseTest {
     Assertions.assertThat(exception.getMessage())
         .isEqualTo("Tipo de Usuário não encontrado!");
     Assertions.assertThat(exception.getHttpStatus())
-        .isEqualTo(404);
+        .isEqualTo(HttpStatus.NOT_FOUND.value());
     }
 
 }
