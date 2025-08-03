@@ -4,10 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name="itemCardapio")
+@Table(name = "itemCardapio")
 @Getter
 @Setter
 @Builder
@@ -29,4 +28,8 @@ public class ItemCardapioEntity {
     private Boolean disponivelApenasNoRestaurante;
 
     private String foto;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idRestaurante")
+    private RestauranteEntity restaurante;
 }

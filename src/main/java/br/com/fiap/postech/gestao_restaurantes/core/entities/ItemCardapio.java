@@ -7,6 +7,7 @@ import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardapio.Preco
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+
 import java.math.BigDecimal;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,6 +24,8 @@ public class ItemCardapio {
     @Setter
     private boolean disponivelApenasNoRestaurante;
     private String foto;
+    @Setter
+    private Restaurante restaurante;
 
     private static void validarNome(String nome) {
         if (nome == null || nome.trim().isEmpty()) {
@@ -52,7 +55,7 @@ public class ItemCardapio {
         }
     }
 
-    public static ItemCardapio create(String nome, String descricao, BigDecimal preco, boolean disponivelApenasNoRestaurante, String foto) {
+    public static ItemCardapio create(String nome, String descricao, BigDecimal preco, boolean disponivelApenasNoRestaurante, String foto, Restaurante restaurante) {
         validarNome(nome);
         validarDescricao(descricao);
         validarPreco(preco);
@@ -63,11 +66,12 @@ public class ItemCardapio {
         item.setPreco(preco);
         item.setDisponivelApenasNoRestaurante(disponivelApenasNoRestaurante);
         item.setFoto(foto);
+        item.setRestaurante(restaurante);
 
         return item;
     }
 
-    public static ItemCardapio create(Long id, String nome, String descricao, BigDecimal preco, boolean disponivelApenasNoRestaurante, String foto) {
+    public static ItemCardapio create(Long id, String nome, String descricao, BigDecimal preco, boolean disponivelApenasNoRestaurante, String foto, Restaurante restaurante) {
         validarNome(nome);
         validarDescricao(descricao);
         validarPreco(preco);
@@ -79,6 +83,7 @@ public class ItemCardapio {
         item.setPreco(preco);
         item.setDisponivelApenasNoRestaurante(disponivelApenasNoRestaurante);
         item.setFoto(foto);
+        item.setRestaurante(restaurante);
 
         return item;
     }

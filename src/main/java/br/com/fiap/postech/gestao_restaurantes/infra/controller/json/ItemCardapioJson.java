@@ -40,6 +40,9 @@ public class ItemCardapioJson {
     @Schema(description = "URL da foto do item de cardápio", example = "https://example.com/foto-pizza.jpg")
     private String foto;
 
+    @Schema(description = "Restaurante ao qual o item de cardápio pertence")
+    private RestauranteJson restaurante;
+
     public ItemCardapioDTO mapToDTO() {
         return new ItemCardapioDTO(
                 id,
@@ -47,7 +50,8 @@ public class ItemCardapioJson {
                 descricao,
                 preco,
                 disponivelApenasNoRestaurante,
-                foto
+                foto,
+                restaurante.mapToDTO()
         );
     }
 
@@ -57,7 +61,8 @@ public class ItemCardapioJson {
                 descricao,
                 preco,
                 disponivelApenasNoRestaurante,
-                foto
+                foto,
+                restaurante.mapToDTO()
         );
     }
 }

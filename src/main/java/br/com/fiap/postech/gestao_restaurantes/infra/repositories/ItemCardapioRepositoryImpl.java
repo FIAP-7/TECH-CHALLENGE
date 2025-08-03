@@ -1,9 +1,9 @@
 package br.com.fiap.postech.gestao_restaurantes.infra.repositories;
 
-import br.com.fiap.postech.gestao_restaurantes.core.dto.ItemCardapioDTO;
-import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoItemCardapioDTO;
+import br.com.fiap.postech.gestao_restaurantes.core.dto.*;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.datasource.IItemCardapioDataSource;
 import br.com.fiap.postech.gestao_restaurantes.infra.persistence.entity.ItemCardapioEntity;
+import br.com.fiap.postech.gestao_restaurantes.infra.persistence.entity.RestauranteEntity;
 import br.com.fiap.postech.gestao_restaurantes.infra.persistence.repository.ItemCardapioJPARepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -71,6 +71,31 @@ public class ItemCardapioRepositoryImpl implements IItemCardapioDataSource {
     }
 
     private ItemCardapioDTO mapToDomain(ItemCardapioEntity itemCardapioEntity) {
+        RestauranteEntity restauranteEntity = itemCardapioEntity.getRestaurante();
+        UsuarioRestauranteDTO usuario = new UsuarioRestauranteDTO(
+                restauranteEntity.getUsuario().getId(),
+                restauranteEntity.getUsuario().getNome()
+        );
+
+        EnderecoDTO endereco = new EnderecoDTO(
+                restauranteEntity.getEndereco().getId(),
+                restauranteEntity.getEndereco().getLogradouro(),
+                restauranteEntity.getEndereco().getNumero(),
+                restauranteEntity.getEndereco().getComplemento(),
+                restauranteEntity.getEndereco().getBairro(),
+                restauranteEntity.getEndereco().getCidade(),
+                restauranteEntity.getEndereco().getEstado(),
+                restauranteEntity.getEndereco().getCep()
+        );
+
+        RestauranteDTO restauranteDTO = new RestauranteDTO(
+                restauranteEntity.getId(),
+                restauranteEntity.getNome(),
+                restauranteEntity.getTipoCozinha(),
+                restauranteEntity.getHorarioFuncionamento(),
+                usuario,
+                endereco
+        );
 
         return new ItemCardapioDTO(
                 itemCardapioEntity.getId(),
@@ -78,7 +103,8 @@ public class ItemCardapioRepositoryImpl implements IItemCardapioDataSource {
                 itemCardapioEntity.getDescricao(),
                 itemCardapioEntity.getPreco(),
                 itemCardapioEntity.getDisponivelApenasNoRestaurante(),
-                itemCardapioEntity.getFoto()
+                itemCardapioEntity.getFoto(),
+                restauranteDTO
         );
     }
 

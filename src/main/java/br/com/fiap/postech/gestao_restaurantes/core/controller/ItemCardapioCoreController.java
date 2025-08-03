@@ -5,8 +5,11 @@ import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoItemCardapioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.entities.ItemCardapio;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardapio.ItemCardapioNaoEncontradoException;
 import br.com.fiap.postech.gestao_restaurantes.core.gateway.ItemCardapioGateway;
+import br.com.fiap.postech.gestao_restaurantes.core.gateway.RestauranteGateway;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.datasource.IItemCardapioDataSource;
+import br.com.fiap.postech.gestao_restaurantes.core.interfaces.datasource.IRestauranteDataSource;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.IItemCardapioGateway;
+import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.IRestauranteGateway;
 import br.com.fiap.postech.gestao_restaurantes.core.presenters.ItemCardapioPresenter;
 import br.com.fiap.postech.gestao_restaurantes.core.usecase.itemCardapio.AtualizarItemCardapioUseCase;
 import br.com.fiap.postech.gestao_restaurantes.core.usecase.itemCardapio.ConsultarItemCardapioUseCase;
@@ -16,20 +19,22 @@ import br.com.fiap.postech.gestao_restaurantes.core.usecase.itemCardapio.Deletar
 public class ItemCardapioCoreController {
 
     private final IItemCardapioDataSource dataSource;
+    private final IRestauranteDataSource restauranteDataSource;
 
-    private ItemCardapioCoreController(IItemCardapioDataSource dataSource) {
+    private ItemCardapioCoreController(IItemCardapioDataSource dataSource, IRestauranteDataSource restauranteDataSource) {
         this.dataSource = dataSource;
+        this.restauranteDataSource = restauranteDataSource;
     }
 
-    public static ItemCardapioCoreController create(IItemCardapioDataSource dataSource) {
-        return new ItemCardapioCoreController(dataSource
-        );
+    public static ItemCardapioCoreController create(IItemCardapioDataSource dataSource, IRestauranteDataSource restauranteDataSource) {
+        return new ItemCardapioCoreController(dataSource, restauranteDataSource);
     }
 
     public ItemCardapioDTO incluir(NovoItemCardapioDTO novoItemCardapioDTO) {
         IItemCardapioGateway itemCardapioGateway = ItemCardapioGateway.create(this.dataSource);
+        IRestauranteGateway restauranteGateway = RestauranteGateway.create(this.restauranteDataSource);
 
-        CriarItemCardapioUseCase criarItemCardapioUsecase = CriarItemCardapioUseCase.create(itemCardapioGateway);
+        CriarItemCardapioUseCase criarItemCardapioUsecase = CriarItemCardapioUseCase.create(itemCardapioGateway, restauranteGateway);
 
         Long idItemCardapio = criarItemCardapioUsecase.executar(novoItemCardapioDTO);
 
@@ -51,8 +56,9 @@ public class ItemCardapioCoreController {
 
     public ItemCardapioDTO alterar(Long id, ItemCardapioDTO itemCardapioDTO) {
         IItemCardapioGateway itemCardapioGateway = ItemCardapioGateway.create(this.dataSource);
+        IRestauranteGateway restauranteGateway = RestauranteGateway.create(this.restauranteDataSource);
 
-        AtualizarItemCardapioUseCase atualizarItemCardapioUseCase = AtualizarItemCardapioUseCase.create(itemCardapioGateway);
+        AtualizarItemCardapioUseCase atualizarItemCardapioUseCase = AtualizarItemCardapioUseCase.create(itemCardapioGateway, restauranteGateway);
 
         atualizarItemCardapioUseCase.executar(id, itemCardapioDTO);
 
@@ -65,5 +71,4 @@ public class ItemCardapioCoreController {
 
         deletarItemCardapioUsecase.executar(id);
     }
-
 }

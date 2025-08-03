@@ -1,8 +1,10 @@
 package br.com.fiap.postech.gestao_restaurantes.core.presenters;
 
-import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoItemCardapioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.ItemCardapioDTO;
+import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoItemCardapioDTO;
+import br.com.fiap.postech.gestao_restaurantes.core.dto.RestauranteDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.entities.ItemCardapio;
+import br.com.fiap.postech.gestao_restaurantes.core.entities.Restaurante;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -22,6 +24,7 @@ public class ItemCardapioPresenter {
     public static ItemCardapioDTO toDTO(ItemCardapio itemCardapio) {
         String precoFormatado = DECIMAL_FORMAT.format(itemCardapio.getPreco());
         BigDecimal preco = new BigDecimal(precoFormatado);
+        RestauranteDTO restauranteDTO = RestaurantePresenter.toDTO(itemCardapio.getRestaurante());
 
         return new ItemCardapioDTO(
                 itemCardapio.getId(),
@@ -29,19 +32,23 @@ public class ItemCardapioPresenter {
                 itemCardapio.getDescricao(),
                 preco,
                 itemCardapio.isDisponivelApenasNoRestaurante(),
-                itemCardapio.getFoto()
+                itemCardapio.getFoto(),
+                restauranteDTO
         );
     }
 
     public static NovoItemCardapioDTO toNovoTipoDTO(ItemCardapio itemCardapio) {
-        return new NovoItemCardapioDTO(itemCardapio.getNome(), itemCardapio.getDescricao(), itemCardapio.getPreco(), itemCardapio.isDisponivelApenasNoRestaurante(), itemCardapio.getFoto());
+        RestauranteDTO restauranteDTO = RestaurantePresenter.toDTO(itemCardapio.getRestaurante());
+        return new NovoItemCardapioDTO(itemCardapio.getNome(), itemCardapio.getDescricao(), itemCardapio.getPreco(), itemCardapio.isDisponivelApenasNoRestaurante(), itemCardapio.getFoto(), restauranteDTO);
     }
 
     public static ItemCardapio toEntity(ItemCardapioDTO itemCardapioDTO) {
-        return ItemCardapio.create(itemCardapioDTO.id(), itemCardapioDTO.nome(), itemCardapioDTO.descricao(), itemCardapioDTO.preco(), itemCardapioDTO.disponivelApenasNoRestaurante(), itemCardapioDTO.foto());
+        Restaurante restaurante = RestaurantePresenter.toEntity(itemCardapioDTO.restaurante());
+        return ItemCardapio.create(itemCardapioDTO.id(), itemCardapioDTO.nome(), itemCardapioDTO.descricao(), itemCardapioDTO.preco(), itemCardapioDTO.disponivelApenasNoRestaurante(), itemCardapioDTO.foto(), restaurante);
     }
 
     public static ItemCardapio toEntity(NovoItemCardapioDTO novoItemCardapioDTO) {
-        return ItemCardapio.create(novoItemCardapioDTO.nome(), novoItemCardapioDTO.descricao(), novoItemCardapioDTO.preco(), novoItemCardapioDTO.disponivelApenasNoRestaurante(), novoItemCardapioDTO.foto());
+        Restaurante restaurante = RestaurantePresenter.toEntity(novoItemCardapioDTO.restaurante());
+        return ItemCardapio.create(novoItemCardapioDTO.nome(), novoItemCardapioDTO.descricao(), novoItemCardapioDTO.preco(), novoItemCardapioDTO.disponivelApenasNoRestaurante(), novoItemCardapioDTO.foto(), restaurante);
     }
 }
