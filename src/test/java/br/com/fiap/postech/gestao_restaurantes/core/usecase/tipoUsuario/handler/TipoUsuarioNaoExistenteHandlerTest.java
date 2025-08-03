@@ -1,7 +1,6 @@
 package br.com.fiap.postech.gestao_restaurantes.core.usecase.tipoUsuario.handler;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;

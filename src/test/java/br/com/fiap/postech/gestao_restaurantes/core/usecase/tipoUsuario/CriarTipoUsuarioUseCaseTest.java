@@ -2,7 +2,6 @@ package br.com.fiap.postech.gestao_restaurantes.core.usecase.tipoUsuario;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -20,9 +19,6 @@ import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoTipoUsuarioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.entities.TipoUsuario;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.TipoUsuarioMesmoNomeExistenteException;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.ITipoUsuarioGateway;
-import br.com.fiap.postech.gestao_restaurantes.core.usecase.tipoUsuario.handler.TipoUsuarioExistenteHandler;
-import br.com.fiap.postech.gestao_restaurantes.core.usecase.tipoUsuario.handler.TipoUsuarioHandler;
-import br.com.fiap.postech.gestao_restaurantes.core.usecase.tipoUsuario.handler.TipoUsuarioNaoExistenteHandlerTest;
 
 class CriarTipoUsuarioUseCaseTest {
 	
