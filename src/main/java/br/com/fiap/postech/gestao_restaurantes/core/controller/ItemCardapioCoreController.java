@@ -30,13 +30,13 @@ public class ItemCardapioCoreController {
         return new ItemCardapioCoreController(dataSource, restauranteDataSource);
     }
 
-    public ItemCardapioDTO incluir(NovoItemCardapioDTO novoItemCardapioDTO) {
+    public Void incluir(NovoItemCardapioDTO novoItemCardapioDTO) {
         IItemCardapioGateway itemCardapioGateway = ItemCardapioGateway.create(this.dataSource);
         IRestauranteGateway restauranteGateway = RestauranteGateway.create(this.restauranteDataSource);
 
         CriarItemCardapioUseCase criarItemCardapioUsecase = CriarItemCardapioUseCase.create(itemCardapioGateway, restauranteGateway);
 
-        Long idItemCardapio = criarItemCardapioUsecase.executar(novoItemCardapioDTO);
+        criarItemCardapioUsecase.executar(novoItemCardapioDTO);
 
         return null;
     }
