@@ -1,6 +1,6 @@
 package br.com.fiap.postech.gestao_restaurantes.core.entities;
 
-import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardapio.DescricaoItemCardapioInvalidoException;
+import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardapio.DescricaoItemCardapioInvalidaException;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardapio.FotoItemCardapioInvalidaException;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardapio.NomeItemCardapioInvalidoException;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardapio.PrecoItemCardapioInvalidoException;
@@ -16,6 +16,10 @@ import java.util.regex.Pattern;
 @EqualsAndHashCode
 public class ItemCardapio {
 
+    public static final double PRECO_MINIMO = 1.99;
+
+    private static final int TAMANHO_MAXIMO_DESCRICAO = 255;
+    private static final int TAMANHO_MAXIMO_NOME = 50;
     @Setter
     private Long id;
     private String nome;
@@ -28,19 +32,19 @@ public class ItemCardapio {
     private Restaurante restaurante;
 
     private static void validarNome(String nome) {
-        if (nome == null || nome.trim().isEmpty()) {
+        if (nome.length() > TAMANHO_MAXIMO_NOME) {
             throw new NomeItemCardapioInvalidoException();
         }
     }
 
     private static void validarDescricao(String descricao) {
-        if (descricao == null || descricao.trim().isEmpty()) {
-            throw new DescricaoItemCardapioInvalidoException();
+        if (descricao.length() > TAMANHO_MAXIMO_DESCRICAO) {
+            throw new DescricaoItemCardapioInvalidaException();
         }
     }
 
     private static void validarPreco(BigDecimal preco) {
-        if (preco == null || preco.compareTo(BigDecimal.ZERO) <= 0) {
+        if (preco.compareTo(BigDecimal.valueOf(PRECO_MINIMO)) < 0) {
             throw new PrecoItemCardapioInvalidoException();
         }
     }
@@ -59,6 +63,7 @@ public class ItemCardapio {
         validarNome(nome);
         validarDescricao(descricao);
         validarPreco(preco);
+        validarFoto(foto);
 
         ItemCardapio item = new ItemCardapio();
         item.setNome(nome);
@@ -75,6 +80,7 @@ public class ItemCardapio {
         validarNome(nome);
         validarDescricao(descricao);
         validarPreco(preco);
+        validarFoto(foto);
 
         ItemCardapio item = new ItemCardapio();
         item.setId(id);
@@ -105,7 +111,6 @@ public class ItemCardapio {
 
     public void setFoto(String foto) {
         validarFoto(foto);
-
         this.foto = foto;
     }
 }
