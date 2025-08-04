@@ -38,7 +38,7 @@ public class ItemCardapioRepositoryImpl implements IItemCardapioDataSource {
     public void deletar(Long id) {
         Optional<ItemCardapioEntity> itemCardapioById = itemCardapioRepository.findById(id);
 
-        if (!itemCardapioById.isPresent()) {
+        if (itemCardapioById.isEmpty()) {
             log.error("Item de cardápio não encontrado: ID={}", id);
             return;
         }
@@ -51,7 +51,7 @@ public class ItemCardapioRepositoryImpl implements IItemCardapioDataSource {
     public void atualizar(Long id, ItemCardapioDTO itemCardapio) {
         Optional<ItemCardapioEntity> itemCardapioById = itemCardapioRepository.findById(id);
 
-        if (!itemCardapioById.isPresent()) {
+        if (itemCardapioById.isEmpty()) {
             log.error("Item de cardápio não encontrado: ID={}", id);
             return;
         }

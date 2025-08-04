@@ -1,15 +1,12 @@
 package br.com.fiap.postech.gestao_restaurantes.infra.repositories;
 
-import java.util.Optional;
-
-import org.springframework.stereotype.Component;
-
 import br.com.fiap.postech.gestao_restaurantes.core.dto.EnderecoDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoRestauranteDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.RestauranteDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.UsuarioRestauranteDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.ErroAoAcessarRepositorioException;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.RestauranteNaoEncontradoException;
+import br.com.fiap.postech.gestao_restaurantes.core.exception.RestauranteUtilizadoException;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.datasource.IRestauranteDataSource;
 import br.com.fiap.postech.gestao_restaurantes.infra.persistence.entity.EnderecoEntity;
 import br.com.fiap.postech.gestao_restaurantes.infra.persistence.entity.RestauranteEntity;
@@ -17,17 +14,20 @@ import br.com.fiap.postech.gestao_restaurantes.infra.persistence.entity.UsuarioE
 import br.com.fiap.postech.gestao_restaurantes.infra.persistence.repository.RestauranteJPARepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class RestauranteRepositoryImpl implements IRestauranteDataSource {
 	private final RestauranteJPARepository restauranteRepository;
-	
+
 	@Override
 	public Long criar(NovoRestauranteDTO novoRestauranteDTO) {
 		RestauranteEntity restauranteEntity = mapToEntity(novoRestauranteDTO);
-		
+
 		return restauranteRepository.save(restauranteEntity).getId();
 	}
 
@@ -35,12 +35,15 @@ public class RestauranteRepositoryImpl implements IRestauranteDataSource {
 	public void deletar(Long id) {
 		Optional<RestauranteEntity> restauranteById = restauranteRepository.findById(id);
 
+		if(restauranteRepository.isUsuarioInUse(id)) {
+			throw new RestauranteUtilizadoException();
+		}
+
         if(restauranteById.isPresent()) {
         	restauranteRepository.deleteById(id);
 
             log.info("Restaurante deletado com sucesso: ID={}", id);
         }
-		
 	}
 
 	@Override
@@ -52,18 +55,18 @@ public class RestauranteRepositoryImpl implements IRestauranteDataSource {
 	@Override
 	public Optional<RestauranteDTO> buscarPorNome(String nome) {
 		Optional<RestauranteEntity> restauranteEntityOptional = restauranteRepository.findByNome(nome);
-		
+
 		if (restauranteEntityOptional.isEmpty()) {
 			return Optional.empty();
 		}
-		
+
 		RestauranteEntity restauranteEntity = restauranteEntityOptional.get();
-		
+
 		RestauranteDTO restaurante = mapToDomain(restauranteEntity);
 
 		return Optional.of(restaurante);
 	}
-	
+
 	@Override
 	public void atualizar(Long id, RestauranteDTO restauranteDTO) {
 		try {
@@ -71,11 +74,11 @@ public class RestauranteRepositoryImpl implements IRestauranteDataSource {
 
             if (restauranteEntity.isPresent()) {
             	RestauranteEntity restaurante = mapToEntity(restauranteDTO);
-            	
+
             	restaurante.setId(id);
             	restaurante.getUsuario().setId(restauranteDTO.usuario().id());
             	restaurante.getEndereco().setId(restauranteEntity.get().getEndereco().getId());
-            	
+
                 restauranteRepository.save(restaurante);
 
                 log.info("Restaurante atualizado com sucesso: ID={}", id);
@@ -84,7 +87,7 @@ public class RestauranteRepositoryImpl implements IRestauranteDataSource {
             log.error(e.getMessage());
             throw new ErroAoAcessarRepositorioException();
         }
-		
+
 	}
 
 	 private RestauranteEntity mapToEntity(NovoRestauranteDTO novoRestauranteDTO) {
@@ -93,12 +96,12 @@ public class RestauranteRepositoryImpl implements IRestauranteDataSource {
 					.tipoCozinha(novoRestauranteDTO.tipoCozinha())
 					.horarioFuncionamento(novoRestauranteDTO.horarioFuncionamento())
 					.build();
-			
+
 			UsuarioEntity usuarioEntity = UsuarioEntity.builder()
 					.id(novoRestauranteDTO.usuario().id())
 					.nome(novoRestauranteDTO.usuario().nome())
 					.build();
-			
+
 	        EnderecoEntity enderecoEntity = EnderecoEntity.builder()
 	                .id(novoRestauranteDTO.endereco().id())
 	                .logradouro(novoRestauranteDTO.endereco().logradouro())
@@ -115,7 +118,7 @@ public class RestauranteRepositoryImpl implements IRestauranteDataSource {
 
 			return restauranteEntity;
 	}
-	 
+
 	 private RestauranteEntity mapToEntity(RestauranteDTO restauranteDTO) {
 			RestauranteEntity restauranteEntity = RestauranteEntity.builder()
 					.id(restauranteDTO.id())
@@ -123,12 +126,12 @@ public class RestauranteRepositoryImpl implements IRestauranteDataSource {
 					.tipoCozinha(restauranteDTO.tipoCozinha())
 					.horarioFuncionamento(restauranteDTO.horarioFuncionamento())
 					.build();
-			
+
 			UsuarioEntity usuarioEntity = UsuarioEntity.builder()
 					.id(restauranteDTO.usuario().id())
 					.nome(restauranteDTO.usuario().nome())
 					.build();
-			
+
 	        EnderecoEntity enderecoEntity = EnderecoEntity.builder()
 	                .id(restauranteDTO.endereco().id())
 	                .logradouro(restauranteDTO.endereco().logradouro())
@@ -151,7 +154,7 @@ public class RestauranteRepositoryImpl implements IRestauranteDataSource {
 		 			restauranteEntity.getUsuario().getId(),
 		 			restauranteEntity.getUsuario().getNome()
  			);
-		 
+
 	        EnderecoDTO endereco = new EnderecoDTO(
 	        		restauranteEntity.getEndereco().getId(),
 	        		restauranteEntity.getEndereco().getLogradouro(),
