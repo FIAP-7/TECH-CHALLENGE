@@ -30,7 +30,7 @@ public class AtualizarItemCardapioUseCase {
         if (itemCardapio.isEmpty()) {
             throw new ItemCardapioNaoEncontradoException();
         }
-        Restaurante restaurante = restauranteGateway.buscarPorId(atualizarItemCardapioDTO.restauranteId());
+        Restaurante restaurante = restauranteGateway.buscarPorId(atualizarItemCardapioDTO.idRestaurante());
         if (restaurante == null) {
             throw new RestauranteNaoEncontradoException();
         }

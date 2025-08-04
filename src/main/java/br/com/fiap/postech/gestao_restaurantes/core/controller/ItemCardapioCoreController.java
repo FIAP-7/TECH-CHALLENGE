@@ -12,10 +12,9 @@ import br.com.fiap.postech.gestao_restaurantes.core.interfaces.datasource.IResta
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.IItemCardapioGateway;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.IRestauranteGateway;
 import br.com.fiap.postech.gestao_restaurantes.core.presenters.ItemCardapioPresenter;
-import br.com.fiap.postech.gestao_restaurantes.core.usecase.itemCardapio.AtualizarItemCardapioUseCase;
-import br.com.fiap.postech.gestao_restaurantes.core.usecase.itemCardapio.ConsultarItemCardapioUseCase;
-import br.com.fiap.postech.gestao_restaurantes.core.usecase.itemCardapio.CriarItemCardapioUseCase;
-import br.com.fiap.postech.gestao_restaurantes.core.usecase.itemCardapio.DeletarItemCardapioUsecase;
+import br.com.fiap.postech.gestao_restaurantes.core.usecase.itemCardapio.*;
+
+import java.util.List;
 
 public class ItemCardapioCoreController {
 
@@ -46,6 +45,14 @@ public class ItemCardapioCoreController {
         ItemCardapio itemCardapio = consultarItemCardapioUseCase.executar(id);
 
         return ItemCardapioPresenter.toDTO(itemCardapio);
+    }
+
+    public List<ItemCardapioDTO> buscarPorIdRestaurante(Long idRestaurante) {
+        IItemCardapioGateway itemCardapioGateway = ItemCardapioGateway.create(this.dataSource);
+        ConsultarItensCardapioPorRestauranteUseCase itensCardapioPorRestauranteUseCase = ConsultarItensCardapioPorRestauranteUseCase.create(itemCardapioGateway);
+        List<ItemCardapio> itemCardapioList = itensCardapioPorRestauranteUseCase.executar(idRestaurante);
+
+        return itemCardapioList.stream().map(ItemCardapioPresenter::toDTO).toList();
     }
 
     public ItemCardapioDTO alterar(Long id, AtualizarItemCardapioDTO atualizarItemCardapioDTO) {

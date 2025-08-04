@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("item-cardapio")
 @RequiredArgsConstructor
@@ -56,6 +58,20 @@ public class ItemCardapioController {
         }
 
         return ResponseEntity.ok(itemCardapioDTO);
+    }
+
+    @GetMapping("/restaurante/{idRestaurante}")
+    @Operation(summary = "Buscar itens de cardápio por ID do restaurante", description = "Retorna os dados dos itens de cardápio a partir do ID do restaurante.")
+    public ResponseEntity<List<ItemCardapioDTO>> getItensCardapioByIdRestaurante(@PathVariable Long idRestaurante) {
+        ItemCardapioCoreController itemCardapioCoreController = ItemCardapioCoreController.create(itemCardapioRepository, restauranteRepository);
+
+        List<ItemCardapioDTO> itemCardapioDTOList = itemCardapioCoreController.buscarPorIdRestaurante(idRestaurante);
+
+        if (itemCardapioDTOList == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(itemCardapioDTOList);
     }
 
     @PutMapping("/{id}")

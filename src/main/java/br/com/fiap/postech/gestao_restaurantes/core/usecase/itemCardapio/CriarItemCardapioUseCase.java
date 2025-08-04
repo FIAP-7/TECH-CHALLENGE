@@ -25,7 +25,7 @@ public class CriarItemCardapioUseCase {
     }
 
     public Long executar(NovoItemCardapioDTO novoItemCardapioDTO) {
-        Restaurante restaurante = restauranteGateway.buscarPorId(novoItemCardapioDTO.restauranteId());
+        Restaurante restaurante = restauranteGateway.buscarPorId(novoItemCardapioDTO.idRestaurante());
         if (restaurante == null) {
             throw new RestauranteNaoEncontradoException();
         }

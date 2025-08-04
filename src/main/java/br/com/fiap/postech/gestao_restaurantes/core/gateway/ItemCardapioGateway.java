@@ -6,7 +6,9 @@ import br.com.fiap.postech.gestao_restaurantes.core.interfaces.datasource.IItemC
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.IItemCardapioGateway;
 import br.com.fiap.postech.gestao_restaurantes.core.presenters.ItemCardapioPresenter;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ItemCardapioGateway implements IItemCardapioGateway {
 
@@ -43,7 +45,10 @@ public class ItemCardapioGateway implements IItemCardapioGateway {
     }
 
     @Override
-    public Optional<ItemCardapio> buscarPorRestaurante(Long idRestaurante) {
-        return this.datasource.buscarPorRestaurante(idRestaurante).map(ItemCardapioPresenter::toEntity);
+    public Optional<List<ItemCardapio>> buscarPorIdRestaurante(Long idRestaurante) {
+        return this.datasource.buscarPorIdRestaurante(idRestaurante)
+                .map(lista -> lista.stream()
+                        .map(ItemCardapioPresenter::toEntity)
+                        .collect(Collectors.toList()));
     }
 }

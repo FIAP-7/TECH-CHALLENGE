@@ -41,7 +41,7 @@ public class ItemCardapioJson {
     private String foto;
 
     @Schema(description = "ID do restaurante ao qual o item de cardápio pertence")
-    private Long restauranteId;
+    private Long idRestaurante;
 
     public NovoItemCardapioDTO mapToNovoDTO() {
         return new NovoItemCardapioDTO(
@@ -50,7 +50,7 @@ public class ItemCardapioJson {
                 preco,
                 disponivelApenasNoRestaurante,
                 foto,
-                restauranteId
+                idRestaurante
         );
     }
 
@@ -61,7 +61,7 @@ public class ItemCardapioJson {
                 preco,
                 disponivelApenasNoRestaurante,
                 foto,
-                restauranteId
+                idRestaurante
         );
     }
 }

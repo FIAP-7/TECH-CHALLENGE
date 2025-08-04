@@ -13,7 +13,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -70,8 +72,14 @@ public class ItemCardapioRepositoryImpl implements IItemCardapioDataSource {
     }
 
     @Override
-    public Optional<ItemCardapioDTO> buscarPorRestaurante(Long idRestaurante) {
-        return Optional.empty();
+    public Optional<List<ItemCardapioDTO>> buscarPorIdRestaurante(Long idRestaurante) {
+        return itemCardapioRepository.findAllByIdRestaurante(idRestaurante)
+                .stream()
+                .map(this::mapToDomain)
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toList(),
+                        Optional::ofNullable
+                ));
     }
 
     private ItemCardapioDTO mapToDomain(ItemCardapioEntity itemCardapioEntity) {
@@ -126,7 +134,7 @@ public class ItemCardapioRepositoryImpl implements IItemCardapioDataSource {
     }
 
     private ItemCardapioEntity mapToEntity(NovoItemCardapioDTO novoItemCardapioDTO) {
-        RestauranteEntity restaurante = entityManager.getReference(RestauranteEntity.class, novoItemCardapioDTO.restauranteId());
+        RestauranteEntity restaurante = entityManager.getReference(RestauranteEntity.class, novoItemCardapioDTO.idRestaurante());
 
         return ItemCardapioEntity.builder()
                 .nome(novoItemCardapioDTO.nome())
