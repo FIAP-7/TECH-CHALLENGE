@@ -1,5 +1,11 @@
 package br.com.fiap.postech.gestao_restaurantes.core.entities;
 
+import java.time.LocalDateTime;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.commons.validator.routines.EmailValidator;
+
 import br.com.fiap.postech.gestao_restaurantes.core.exception.CpfUsuarioInvalidoException;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.EmailUsuarioInvalidoException;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.NomeUsuarioInvalidoException;
@@ -7,11 +13,6 @@ import br.com.fiap.postech.gestao_restaurantes.core.exception.SenhaFormatoInvali
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.commons.validator.routines.EmailValidator;
-
-import java.time.LocalDateTime;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Getter
 @EqualsAndHashCode
@@ -112,6 +113,27 @@ public class Usuario {
         return usuario;
     }
 
+    public static Usuario create(Long id, String nome) {
+        Usuario usuario = new Usuario();
+
+        usuario.setId(id);
+        usuario.setNome(nome);
+
+        return usuario;
+    }
+
+	public static Usuario create(Long id) {
+		if (id == null) {
+			throw new IllegalArgumentException("Faltam dados");
+		}
+		
+		Usuario usuario = new Usuario();
+
+        usuario.setId(id);
+	        
+        return usuario;
+	}
+	
     public void setCpf(String cpf) {
         cpfValido(cpf);
 
