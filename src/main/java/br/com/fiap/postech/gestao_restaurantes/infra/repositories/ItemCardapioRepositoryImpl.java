@@ -2,9 +2,13 @@ package br.com.fiap.postech.gestao_restaurantes.infra.repositories;
 
 import br.com.fiap.postech.gestao_restaurantes.core.dto.*;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.datasource.IItemCardapioDataSource;
+import br.com.fiap.postech.gestao_restaurantes.infra.persistence.entity.EnderecoEntity;
 import br.com.fiap.postech.gestao_restaurantes.infra.persistence.entity.ItemCardapioEntity;
 import br.com.fiap.postech.gestao_restaurantes.infra.persistence.entity.RestauranteEntity;
+import br.com.fiap.postech.gestao_restaurantes.infra.persistence.entity.UsuarioEntity;
 import br.com.fiap.postech.gestao_restaurantes.infra.persistence.repository.ItemCardapioJPARepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -17,6 +21,9 @@ import java.util.Optional;
 public class ItemCardapioRepositoryImpl implements IItemCardapioDataSource {
 
     private final ItemCardapioJPARepository itemCardapioRepository;
+    @PersistenceContext
+    private EntityManager entityManager;
+
 
     @Override
     public Long criar(NovoItemCardapioDTO novoItemCardapio) {
@@ -117,17 +124,50 @@ public class ItemCardapioRepositoryImpl implements IItemCardapioDataSource {
                 .preco(itemCardapio.preco())
                 .disponivelApenasNoRestaurante(itemCardapio.disponivelApenasNoRestaurante())
                 .foto(itemCardapio.foto())
+                .restaurante(mapToEntity(itemCardapio.restaurante()))
                 .build();
     }
 
-    private ItemCardapioEntity mapToEntity(NovoItemCardapioDTO itemCardapio) {
+    private ItemCardapioEntity mapToEntity(NovoItemCardapioDTO novoItemCardapioDTO) {
+        RestauranteEntity restaurante = entityManager.getReference(RestauranteEntity.class, novoItemCardapioDTO.restauranteId());
 
         return ItemCardapioEntity.builder()
-                .nome(itemCardapio.nome())
-                .descricao(itemCardapio.descricao())
-                .preco(itemCardapio.preco())
-                .disponivelApenasNoRestaurante(itemCardapio.disponivelApenasNoRestaurante())
-                .foto(itemCardapio.foto())
+                .nome(novoItemCardapioDTO.nome())
+                .descricao(novoItemCardapioDTO.descricao())
+                .preco(novoItemCardapioDTO.preco())
+                .disponivelApenasNoRestaurante(novoItemCardapioDTO.disponivelApenasNoRestaurante())
+                .foto(novoItemCardapioDTO.foto())
+                .restaurante(restaurante)
                 .build();
+    }
+
+    private RestauranteEntity mapToEntity(RestauranteDTO restauranteDTO) {
+        RestauranteEntity restauranteEntity = RestauranteEntity.builder()
+                .id(restauranteDTO.id())
+                .nome(restauranteDTO.nome())
+                .tipoCozinha(restauranteDTO.tipoCozinha())
+                .horarioFuncionamento(restauranteDTO.horarioFuncionamento())
+                .build();
+
+        UsuarioEntity usuarioEntity = UsuarioEntity.builder()
+                .id(restauranteDTO.usuario().id())
+                .nome(restauranteDTO.usuario().nome())
+                .build();
+
+        EnderecoEntity enderecoEntity = EnderecoEntity.builder()
+                .id(restauranteDTO.endereco().id())
+                .logradouro(restauranteDTO.endereco().logradouro())
+                .numero(restauranteDTO.endereco().numero())
+                .complemento(restauranteDTO.endereco().complemento())
+                .bairro(restauranteDTO.endereco().bairro())
+                .cidade(restauranteDTO.endereco().cidade())
+                .estado(restauranteDTO.endereco().estado())
+                .cep(restauranteDTO.endereco().cep())
+                .build();
+
+        restauranteEntity.setUsuario(usuarioEntity);
+        restauranteEntity.setEndereco(enderecoEntity);
+
+        return restauranteEntity;
     }
 }

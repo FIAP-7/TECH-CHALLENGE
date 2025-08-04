@@ -3,7 +3,7 @@ package br.com.fiap.postech.gestao_restaurantes.core.usecase.itemCardapio;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoItemCardapioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.entities.ItemCardapio;
 import br.com.fiap.postech.gestao_restaurantes.core.entities.Restaurante;
-import br.com.fiap.postech.gestao_restaurantes.core.exception.RestauranteExistenteException;
+import br.com.fiap.postech.gestao_restaurantes.core.exception.RestauranteNaoEncontradoException;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.IItemCardapioGateway;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.IRestauranteGateway;
 import lombok.extern.slf4j.Slf4j;
@@ -25,9 +25,9 @@ public class CriarItemCardapioUseCase {
     }
 
     public Long executar(NovoItemCardapioDTO novoItemCardapioDTO) {
-        Restaurante restaurante = restauranteGateway.buscarPorId(novoItemCardapioDTO.restaurante().id());
+        Restaurante restaurante = restauranteGateway.buscarPorId(novoItemCardapioDTO.restauranteId());
         if (restaurante == null) {
-            throw new RestauranteExistenteException();
+            throw new RestauranteNaoEncontradoException();
         }
 
         ItemCardapio entity = ItemCardapio.create(novoItemCardapioDTO.nome(), novoItemCardapioDTO.descricao(), novoItemCardapioDTO.preco(), novoItemCardapioDTO.disponivelApenasNoRestaurante(), novoItemCardapioDTO.foto(), restaurante);

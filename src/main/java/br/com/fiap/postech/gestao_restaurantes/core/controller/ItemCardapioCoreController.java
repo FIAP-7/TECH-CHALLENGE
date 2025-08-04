@@ -1,5 +1,6 @@
 package br.com.fiap.postech.gestao_restaurantes.core.controller;
 
+import br.com.fiap.postech.gestao_restaurantes.core.dto.AtualizarItemCardapioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.ItemCardapioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoItemCardapioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.entities.ItemCardapio;
@@ -54,13 +55,13 @@ public class ItemCardapioCoreController {
         }
     }
 
-    public ItemCardapioDTO alterar(Long id, ItemCardapioDTO itemCardapioDTO) {
+    public ItemCardapioDTO alterar(Long id, AtualizarItemCardapioDTO atualizarItemCardapioDTO) {
         IItemCardapioGateway itemCardapioGateway = ItemCardapioGateway.create(this.dataSource);
         IRestauranteGateway restauranteGateway = RestauranteGateway.create(this.restauranteDataSource);
 
         AtualizarItemCardapioUseCase atualizarItemCardapioUseCase = AtualizarItemCardapioUseCase.create(itemCardapioGateway, restauranteGateway);
 
-        atualizarItemCardapioUseCase.executar(id, itemCardapioDTO);
+        atualizarItemCardapioUseCase.executar(id, atualizarItemCardapioDTO);
 
         return null;
     }

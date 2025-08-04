@@ -39,16 +39,11 @@ public class ItemCardapioPresenter {
 
     public static NovoItemCardapioDTO toNovoTipoDTO(ItemCardapio itemCardapio) {
         RestauranteDTO restauranteDTO = RestaurantePresenter.toDTO(itemCardapio.getRestaurante());
-        return new NovoItemCardapioDTO(itemCardapio.getNome(), itemCardapio.getDescricao(), itemCardapio.getPreco(), itemCardapio.isDisponivelApenasNoRestaurante(), itemCardapio.getFoto(), restauranteDTO);
+        return new NovoItemCardapioDTO(itemCardapio.getNome(), itemCardapio.getDescricao(), itemCardapio.getPreco(), itemCardapio.isDisponivelApenasNoRestaurante(), itemCardapio.getFoto(), restauranteDTO.id());
     }
 
     public static ItemCardapio toEntity(ItemCardapioDTO itemCardapioDTO) {
         Restaurante restaurante = RestaurantePresenter.toEntity(itemCardapioDTO.restaurante());
         return ItemCardapio.create(itemCardapioDTO.id(), itemCardapioDTO.nome(), itemCardapioDTO.descricao(), itemCardapioDTO.preco(), itemCardapioDTO.disponivelApenasNoRestaurante(), itemCardapioDTO.foto(), restaurante);
-    }
-
-    public static ItemCardapio toEntity(NovoItemCardapioDTO novoItemCardapioDTO) {
-        Restaurante restaurante = RestaurantePresenter.toEntity(novoItemCardapioDTO.restaurante());
-        return ItemCardapio.create(novoItemCardapioDTO.nome(), novoItemCardapioDTO.descricao(), novoItemCardapioDTO.preco(), novoItemCardapioDTO.disponivelApenasNoRestaurante(), novoItemCardapioDTO.foto(), restaurante);
     }
 }

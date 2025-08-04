@@ -1,6 +1,6 @@
 package br.com.fiap.postech.gestao_restaurantes.infra.controller.json;
 
-import br.com.fiap.postech.gestao_restaurantes.core.dto.ItemCardapioDTO;
+import br.com.fiap.postech.gestao_restaurantes.core.dto.AtualizarItemCardapioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoItemCardapioDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
@@ -40,20 +40,8 @@ public class ItemCardapioJson {
     @Schema(description = "URL da foto do item de cardápio", example = "https://example.com/foto-pizza.jpg")
     private String foto;
 
-    @Schema(description = "Restaurante ao qual o item de cardápio pertence")
-    private RestauranteJson restaurante;
-
-    public ItemCardapioDTO mapToDTO() {
-        return new ItemCardapioDTO(
-                id,
-                nome,
-                descricao,
-                preco,
-                disponivelApenasNoRestaurante,
-                foto,
-                restaurante.mapToDTO()
-        );
-    }
+    @Schema(description = "ID do restaurante ao qual o item de cardápio pertence")
+    private Long restauranteId;
 
     public NovoItemCardapioDTO mapToNovoDTO() {
         return new NovoItemCardapioDTO(
@@ -62,7 +50,18 @@ public class ItemCardapioJson {
                 preco,
                 disponivelApenasNoRestaurante,
                 foto,
-                restaurante.mapToDTO()
+                restauranteId
+        );
+    }
+
+    public AtualizarItemCardapioDTO mapToDTO() {
+        return new AtualizarItemCardapioDTO(
+                nome,
+                descricao,
+                preco,
+                disponivelApenasNoRestaurante,
+                foto,
+                restauranteId
         );
     }
 }

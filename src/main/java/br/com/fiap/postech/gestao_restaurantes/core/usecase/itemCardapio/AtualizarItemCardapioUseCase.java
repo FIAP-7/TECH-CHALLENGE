@@ -1,8 +1,9 @@
 package br.com.fiap.postech.gestao_restaurantes.core.usecase.itemCardapio;
 
-import br.com.fiap.postech.gestao_restaurantes.core.dto.ItemCardapioDTO;
+import br.com.fiap.postech.gestao_restaurantes.core.dto.AtualizarItemCardapioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.entities.ItemCardapio;
 import br.com.fiap.postech.gestao_restaurantes.core.entities.Restaurante;
+import br.com.fiap.postech.gestao_restaurantes.core.exception.RestauranteNaoEncontradoException;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardapio.ItemCardapioNaoEncontradoException;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.IItemCardapioGateway;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.IRestauranteGateway;
@@ -24,13 +25,16 @@ public class AtualizarItemCardapioUseCase {
         return new AtualizarItemCardapioUseCase(itemCardapioGateway, restauranteGateway);
     }
 
-    public void executar(Long id, ItemCardapioDTO itemCardapioDTO) {
+    public void executar(Long id, AtualizarItemCardapioDTO atualizarItemCardapioDTO) {
         Optional<ItemCardapio> itemCardapio = itemCardapioGateway.buscarPorId(id);
         if (itemCardapio.isEmpty()) {
             throw new ItemCardapioNaoEncontradoException();
         }
-        Restaurante restaurante = restauranteGateway.buscarPorId(itemCardapioDTO.restaurante().id());
-        ItemCardapio entity = ItemCardapio.create(id, itemCardapioDTO.nome(), itemCardapioDTO.descricao(), itemCardapioDTO.preco(), itemCardapioDTO.disponivelApenasNoRestaurante(), itemCardapioDTO.foto(), restaurante);
+        Restaurante restaurante = restauranteGateway.buscarPorId(atualizarItemCardapioDTO.restauranteId());
+        if (restaurante == null) {
+            throw new RestauranteNaoEncontradoException();
+        }
+        ItemCardapio entity = ItemCardapio.create(id, atualizarItemCardapioDTO.nome(), atualizarItemCardapioDTO.descricao(), atualizarItemCardapioDTO.preco(), atualizarItemCardapioDTO.disponivelApenasNoRestaurante(), atualizarItemCardapioDTO.foto(), restaurante);
 
         this.itemCardapioGateway.atualizar(id, entity);
     }

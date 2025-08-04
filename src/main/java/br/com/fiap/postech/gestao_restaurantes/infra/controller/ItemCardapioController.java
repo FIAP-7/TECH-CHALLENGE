@@ -1,6 +1,7 @@
 package br.com.fiap.postech.gestao_restaurantes.infra.controller;
 
 import br.com.fiap.postech.gestao_restaurantes.core.controller.ItemCardapioCoreController;
+import br.com.fiap.postech.gestao_restaurantes.core.dto.AtualizarItemCardapioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.ItemCardapioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoItemCardapioDTO;
 import br.com.fiap.postech.gestao_restaurantes.infra.controller.json.ItemCardapioJson;
@@ -62,8 +63,8 @@ public class ItemCardapioController {
     public ResponseEntity<Void> atualizarItemCardapio(@PathVariable Long id, @Valid @RequestBody ItemCardapioJson itemCardapioJson) {
         ItemCardapioCoreController itemCardapioCoreController = ItemCardapioCoreController.create(itemCardapioRepository, restauranteRepository);
 
-        ItemCardapioDTO itemCardapioDTO = itemCardapioJson.mapToDTO();
-        itemCardapioCoreController.alterar(id, itemCardapioDTO);
+        AtualizarItemCardapioDTO atualizarItemCardapioDTO = itemCardapioJson.mapToDTO();
+        itemCardapioCoreController.alterar(id, atualizarItemCardapioDTO);
 
         return ResponseEntity.noContent().build();
     }

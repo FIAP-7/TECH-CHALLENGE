@@ -29,7 +29,7 @@ public class ItemCardapioEntity {
 
     private String foto;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idRestaurante")
     private RestauranteEntity restaurante;
 }
