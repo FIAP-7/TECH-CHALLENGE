@@ -34,9 +34,7 @@ public class ItemCardapioCoreController {
     public Void incluir(NovoItemCardapioDTO novoItemCardapioDTO) {
         IItemCardapioGateway itemCardapioGateway = ItemCardapioGateway.create(this.dataSource);
         IRestauranteGateway restauranteGateway = RestauranteGateway.create(this.restauranteDataSource);
-
         CriarItemCardapioUseCase criarItemCardapioUsecase = CriarItemCardapioUseCase.create(itemCardapioGateway, restauranteGateway);
-
         criarItemCardapioUsecase.executar(novoItemCardapioDTO);
 
         return null;
@@ -45,14 +43,9 @@ public class ItemCardapioCoreController {
     public ItemCardapioDTO buscarPorId(Long id) {
         IItemCardapioGateway itemCardapioGateway = ItemCardapioGateway.create(this.dataSource);
         ConsultarItemCardapioUseCase consultarItemCardapioUseCase = ConsultarItemCardapioUseCase.create(itemCardapioGateway);
+        ItemCardapio itemCardapio = consultarItemCardapioUseCase.executar(id);
 
-        try {
-            ItemCardapio itemCardapio = consultarItemCardapioUseCase.executar(id);
-
-            return ItemCardapioPresenter.toDTO(itemCardapio);
-        } catch (ItemCardapioNaoEncontradoException e) {
-            return null;
-        }
+        return ItemCardapioPresenter.toDTO(itemCardapio);
     }
 
     public ItemCardapioDTO alterar(Long id, AtualizarItemCardapioDTO atualizarItemCardapioDTO) {

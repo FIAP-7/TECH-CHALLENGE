@@ -44,6 +44,7 @@ public class ItemCardapioPresenter {
 
     public static ItemCardapio toEntity(ItemCardapioDTO itemCardapioDTO) {
         Restaurante restaurante = RestaurantePresenter.toEntity(itemCardapioDTO.restaurante());
+        restaurante.setId(itemCardapioDTO.restaurante().id());
         return ItemCardapio.create(itemCardapioDTO.id(), itemCardapioDTO.nome(), itemCardapioDTO.descricao(), itemCardapioDTO.preco(), itemCardapioDTO.disponivelApenasNoRestaurante(), itemCardapioDTO.foto(), restaurante);
     }
 }

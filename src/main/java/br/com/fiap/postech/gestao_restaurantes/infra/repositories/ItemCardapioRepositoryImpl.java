@@ -66,10 +66,7 @@ public class ItemCardapioRepositoryImpl implements IItemCardapioDataSource {
 
         return itemCardapioRepository.findById(id)
                 .map(this::mapToDomain)
-                .or(() -> {
-                    log.error("Item de cardápio não encontrado: ID={}", id);
-                    return Optional.empty();
-                });
+                .or(Optional::empty);
     }
 
     @Override

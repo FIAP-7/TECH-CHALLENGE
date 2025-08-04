@@ -13,7 +13,7 @@ public interface IItemCardapioDataSource {
 
     void atualizar(Long id, ItemCardapioDTO itemCardapio);
 
-   Optional<ItemCardapioDTO> buscarPorId(Long id);
-    
+    Optional<ItemCardapioDTO> buscarPorId(Long id);
+
     Optional<ItemCardapioDTO> buscarPorRestaurante(Long idRestaurante);
 }
