@@ -22,9 +22,7 @@ public class Restaurante {
     private Endereco endereco;
     
 	public static Restaurante create(String nome, String tipoCozinha, String horarioFuncionamento, Usuario usuario, Endereco endereco) {
-		if (nome == null || tipoCozinha == null || horarioFuncionamento == null || usuario == null || endereco == null) {
-			throw new IllegalArgumentException("Faltam dados");
-		}
+		validarDados(nome, tipoCozinha, horarioFuncionamento, usuario, endereco);
 
 		Restaurante restaurante = new Restaurante();
 		
@@ -37,8 +35,15 @@ public class Restaurante {
 		return restaurante;
 	}
 
+	private static void validarDados(String nome, String tipoCozinha, String horarioFuncionamento, Usuario usuario, Endereco endereco) {
+		if (nome == null || tipoCozinha == null || horarioFuncionamento == null || usuario == null || endereco == null) {
+			throw new IllegalArgumentException("Faltam dados");
+		}
+	}
+
 	public static Restaurante create(Long id, String nome, String tipoCozinha, String horarioFuncionamento, Usuario usuario, Endereco endereco) {
-		if (id == null || nome == null || tipoCozinha == null || horarioFuncionamento == null || usuario == null || endereco == null) {
+		validarDados(nome, tipoCozinha, horarioFuncionamento, usuario, endereco);
+		if (id == null) {
 			throw new IllegalArgumentException("Faltam dados");
 		}
 
