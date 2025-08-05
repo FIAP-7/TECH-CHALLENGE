@@ -16,7 +16,7 @@ public class AtualizarItemCardapioUseCase {
     private final IRestauranteGateway restauranteGateway;
 
 
-    private AtualizarItemCardapioUseCase(IItemCardapioGateway itemCardapioGateway, IRestauranteGateway restauranteGateway) {
+    public AtualizarItemCardapioUseCase(IItemCardapioGateway itemCardapioGateway, IRestauranteGateway restauranteGateway) {
         this.itemCardapioGateway = itemCardapioGateway;
         this.restauranteGateway = restauranteGateway;
     }
