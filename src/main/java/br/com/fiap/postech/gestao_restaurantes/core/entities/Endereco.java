@@ -40,11 +40,14 @@ public class Endereco {
 
     }
 
-    public static Endereco create(String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String cep) throws IllegalArgumentException {
+    private static void validarDados(String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String cep) {
         if(logradouro == null || numero == null || complemento == null || bairro == null || cidade == null || estado == null || cep == null) {
             throw new IllegalArgumentException("Faltam dados");
         }
 
+    }
+    public static Endereco create(String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String cep) throws IllegalArgumentException {
+    	validarDados(logradouro, numero, complemento, bairro, cidade, estado, cep);
         Endereco endereco = new Endereco();
 
         endereco.setLogradouro(logradouro);
@@ -59,9 +62,7 @@ public class Endereco {
     }
 
     public static Endereco create(Long id, String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String cep) throws IllegalArgumentException {
-        if(logradouro == null || numero == null || complemento == null || bairro == null || cidade == null || estado == null || cep == null) {
-            throw new IllegalArgumentException("Faltam dados");
-        }
+    	validarDados(logradouro, numero, complemento, bairro, cidade, estado, cep);
 
         Endereco endereco = new Endereco();
 

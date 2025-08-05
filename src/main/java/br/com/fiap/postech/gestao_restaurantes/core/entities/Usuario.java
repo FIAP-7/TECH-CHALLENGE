@@ -75,9 +75,7 @@ public class Usuario {
     }
 
     public static Usuario create(String cpf, String nome, String email, String login, String senha, LocalDateTime dataUltimaAlteracao, TipoUsuario tipoUsuario, Endereco endereco) {
-        if (cpf == null || nome == null || email == null || login == null || senha == null || endereco == null) {
-            throw new IllegalArgumentException("Faltam dados");
-        }
+    	validarDados(cpf, nome, email, login, senha, endereco);
 
         Usuario usuario = new Usuario();
 
@@ -92,11 +90,15 @@ public class Usuario {
 
         return usuario;
     }
-
-    public static Usuario create(Long id, String cpf, String nome, String email, String login, String senha, LocalDateTime dataUltimaAlteracao, TipoUsuario tipoUsuario, Endereco endereco) {
+    
+    private static void validarDados(String cpf, String nome, String email, String login, String senha,  Endereco endereco) {
         if (cpf == null || nome == null || email == null || login == null || senha == null || endereco == null) {
             throw new IllegalArgumentException("Faltam dados");
         }
+    }
+
+    public static Usuario create(Long id, String cpf, String nome, String email, String login, String senha, LocalDateTime dataUltimaAlteracao, TipoUsuario tipoUsuario, Endereco endereco) {
+    	validarDados(cpf, nome, email, login, senha, endereco);
 
         Usuario usuario = new Usuario();
 
