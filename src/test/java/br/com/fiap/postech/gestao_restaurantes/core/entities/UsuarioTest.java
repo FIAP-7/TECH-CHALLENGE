@@ -149,9 +149,10 @@ class UsuarioTest {
 
 	@Test
 	void deveValidarEqualsAndHashCode() {
-        Usuario usuario1 = Usuario.create(ID, CPF, NOME, EMAIL, LOGIN, SENHA, LocalDateTime.now(), tipoUsuario, endereco);
-        Usuario usuario2 = Usuario.create(ID, CPF, NOME, EMAIL, LOGIN, SENHA, LocalDateTime.now(), tipoUsuario, endereco);
-        Usuario usuario3 = Usuario.create(2L, "123.456.789-00", "Outro", "outro@teste.com", "outro", "Senha$456", LocalDateTime.now(), tipoUsuario, endereco);
+		var dataHora = LocalDateTime.now();
+        Usuario usuario1 = Usuario.create(ID, CPF, NOME, EMAIL, LOGIN, SENHA, dataHora, tipoUsuario, endereco);
+        Usuario usuario2 = Usuario.create(ID, CPF, NOME, EMAIL, LOGIN, SENHA, dataHora, tipoUsuario, endereco);
+        Usuario usuario3 = Usuario.create(2L, "123.456.789-00", "Outro", "outro@teste.com", "outro", "Senha$456", dataHora, tipoUsuario, endereco);
 
         assertThat(usuario1).isEqualTo(usuario2);
         assertThat(usuario1.hashCode()).isEqualTo(usuario2.hashCode());
