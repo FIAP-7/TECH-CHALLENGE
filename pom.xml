@@ -129,6 +129,35 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+		      <groupId>org.jacoco</groupId>
+		      <artifactId>jacoco-maven-plugin</artifactId>
+		      <version>0.8.9</version>
+		      <executions>
+		        <execution>
+		          <goals>
+		            <goal>prepare-agent</goal>
+		          </goals>
+		        </execution>
+		        <execution>
+		          <id>report</id>
+		          <phase>verify</phase>
+		          <goals>
+		            <goal>report</goal>
+		          </goals>
+		        </execution>
+		      </executions>
+		      <configuration>
+		        <excludes>
+		          <exclude>**/dto/**</exclude>
+		          <exclude>**/entity/**</exclude>
+		          <exclude>**/config/**</exclude>
+		          <exclude>**/presenters/**</exclude>
+		          <exclude>**/controller/**</exclude>
+		          <exclude>**/GestaoRestaurantesApplication.class</exclude>
+		        </excludes>
+		      </configuration>
+		    </plugin>
 		</plugins>
 	</build>
 

@@ -2,10 +2,7 @@ package br.com.fiap.postech.gestao_restaurantes.core.usecase.validarLogin;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
@@ -18,11 +15,8 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 
 import br.com.fiap.postech.gestao_restaurantes.core.dto.CredenciaisDTO;
-import br.com.fiap.postech.gestao_restaurantes.core.dto.TipoUsuarioDTO;
-import br.com.fiap.postech.gestao_restaurantes.core.entities.Credenciais;
 import br.com.fiap.postech.gestao_restaurantes.core.entities.Usuario;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.LoginSenhaInvalidosException;
-import br.com.fiap.postech.gestao_restaurantes.core.exception.TipoUsuarioNaoEncontradoException;
 import br.com.fiap.postech.gestao_restaurantes.core.interfaces.gateway.IUsuarioGateway;
 import br.com.fiap.postech.gestao_restaurantes.core.usecase.validarLogin.handler.LoginExistenteHandler;
 import br.com.fiap.postech.gestao_restaurantes.core.usecase.validarLogin.handler.SenhaCorretaHandler;

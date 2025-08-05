@@ -1,5 +1,23 @@
 package br.com.fiap.postech.gestao_restaurantes.infra.repositories;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.HttpStatus;
+
 import br.com.fiap.postech.gestao_restaurantes.core.dto.EnderecoDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.NovoUsuarioDTO;
 import br.com.fiap.postech.gestao_restaurantes.core.dto.TipoUsuarioDTO;
@@ -10,22 +28,6 @@ import br.com.fiap.postech.gestao_restaurantes.infra.persistence.entity.Endereco
 import br.com.fiap.postech.gestao_restaurantes.infra.persistence.entity.TipoUsuarioEntity;
 import br.com.fiap.postech.gestao_restaurantes.infra.persistence.entity.UsuarioEntity;
 import br.com.fiap.postech.gestao_restaurantes.infra.persistence.repository.UsuarioJPARepository;
-
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.http.HttpStatus;
-
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.*;
 
 class UsuarioRepositoryImplTest {
 	@Mock
