@@ -1,17 +1,13 @@
 package br.com.fiap.postech.gestao_restaurantes.core.entities;
 
-import static br.com.fiap.postech.gestao_restaurantes.core.entities.ItemCardapio.PRECO_MINIMO;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardapio.DescricaoItemCardapioInvalidaException;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardapio.FotoItemCardapioInvalidaException;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardapio.NomeItemCardapioInvalidoException;
 import br.com.fiap.postech.gestao_restaurantes.core.exception.itemCardapio.PrecoItemCardapioInvalidoException;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 class ItemCardapioTest {
 	private static final Long ID = 1L;
@@ -86,7 +82,7 @@ class ItemCardapioTest {
 			() -> ItemCardapio.create(NOME_INVALIDO, DESCRICAO, PRECO_VALIDO, DISPONIVEL, FOTO_VALIDA, restaurante)
 		);
 		Assertions.assertThat(exception.getCode()).isEqualTo("itemCardapio.nomeInvalido");
-		Assertions.assertThat(exception.getMessage()).isEqualTo("Nome do item não pode conter mais de 50 caracteres.");
+		Assertions.assertThat(exception.getMessage()).isEqualTo("Nome do item do cardápio inválido!");
 		Assertions.assertThat(exception.getHttpStatus()).isEqualTo(400);
 	}
 
@@ -98,7 +94,7 @@ class ItemCardapioTest {
 			() -> ItemCardapio.create(NOME, DESCRICAO_INVALIDA, PRECO_VALIDO, DISPONIVEL, FOTO_VALIDA, restaurante)
 		);
 		Assertions.assertThat(exception.getCode()).isEqualTo("itemCardapio.descricaoInvalida");
-		Assertions.assertThat(exception.getMessage()).isEqualTo("Descrição do item não pode conter mais de 255 caracteres.");
+		Assertions.assertThat(exception.getMessage()).isEqualTo("Descrição do item do cardápio inválida!");
 		Assertions.assertThat(exception.getHttpStatus()).isEqualTo(400);
 	}
 
@@ -110,7 +106,7 @@ class ItemCardapioTest {
 			() -> ItemCardapio.create(NOME, DESCRICAO, PRECO_INVALIDO, DISPONIVEL, FOTO_VALIDA, restaurante)
 		);
 		Assertions.assertThat(exception.getCode()).isEqualTo("itemCardapio.precoInvalido");
-		Assertions.assertThat(exception.getMessage()).isEqualTo("Preço deve ser igual ou maior que " + PRECO_MINIMO + ".");
+		Assertions.assertThat(exception.getMessage()).isEqualTo("Preço do item do cardápio inválido!");
 		Assertions.assertThat(exception.getHttpStatus()).isEqualTo(400);
 	}
 
@@ -122,8 +118,8 @@ class ItemCardapioTest {
 			() -> ItemCardapio.create(NOME, DESCRICAO, PRECO_VALIDO, DISPONIVEL, FOTO_INVALIDA, restaurante)
 		);
 		Assertions.assertThat(exception.getCode()).isEqualTo("itemCardapio.fotoInvalida");
-		Assertions.assertThat(exception.getMessage()).isEqualTo("URL da foto inválida.");
-		Assertions.assertThat(exception.getHttpStatus()).isEqualTo(401);
+		Assertions.assertThat(exception.getMessage()).isEqualTo("Foto do item do cardápio inválida!");
+		Assertions.assertThat(exception.getHttpStatus()).isEqualTo(400);
 	}
 
 	@Test

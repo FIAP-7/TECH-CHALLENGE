@@ -9,6 +9,9 @@ import br.com.fiap.postech.gestao_restaurantes.infra.repositories.ItemCardapioRe
 import br.com.fiap.postech.gestao_restaurantes.infra.repositories.RestauranteRepositoryImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.PostConstruct;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +27,18 @@ public class ItemCardapioController {
 
     private final ItemCardapioRepositoryImpl itemCardapioRepository;
     private final RestauranteRepositoryImpl restauranteRepository;
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @PostConstruct
+    private void init() {
+        itemCardapioRepository.setEntityManager(entityManager);
+    }
 
     @PostMapping
     @Operation(summary = "Criar item de cardápio", description = "Cria um novo item de cardápio no sistema.")
     public ResponseEntity<Void> criar(@Valid @RequestBody ItemCardapioJson itemCardapioJson) {
+        itemCardapioRepository.setEntityManager(entityManager);
         ItemCardapioCoreController itemCardapioCoreController = ItemCardapioCoreController.create(itemCardapioRepository, restauranteRepository);
 
         NovoItemCardapioDTO novoItemCardapioDTO = itemCardapioJson.mapToNovoDTO();
