@@ -8,8 +8,8 @@ import br.com.fiap.postech.gestao_restaurantes.infra.persistence.entity.Restaura
 import br.com.fiap.postech.gestao_restaurantes.infra.persistence.entity.UsuarioEntity;
 import br.com.fiap.postech.gestao_restaurantes.infra.persistence.repository.ItemCardapioJPARepository;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -23,9 +23,9 @@ import java.util.stream.Collectors;
 public class ItemCardapioRepositoryImpl implements IItemCardapioDataSource {
 
     private final ItemCardapioJPARepository itemCardapioRepository;
-    @PersistenceContext
-    private EntityManager entityManager;
 
+    @Setter
+    private EntityManager entityManager;
 
     @Override
     public Long criar(NovoItemCardapioDTO novoItemCardapio) {
