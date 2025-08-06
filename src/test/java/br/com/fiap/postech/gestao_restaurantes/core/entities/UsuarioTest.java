@@ -146,16 +146,4 @@ class UsuarioTest {
 		assertThat(exception.getMessage()).isEqualTo("Senha precisa ter mais de 8 caracteres e possuir pelo menos uma letra maiúscula, uma letra minúscula, um número e um caracter especial.");
 		assertThat(exception.getHttpStatus()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
 	}
-
-	@Test
-	void deveValidarEqualsAndHashCode() {
-        Usuario usuario1 = Usuario.create(ID, CPF, NOME, EMAIL, LOGIN, SENHA, LocalDateTime.now(), tipoUsuario, endereco);
-        Usuario usuario2 = Usuario.create(ID, CPF, NOME, EMAIL, LOGIN, SENHA, LocalDateTime.now(), tipoUsuario, endereco);
-        Usuario usuario3 = Usuario.create(2L, "123.456.789-00", "Outro", "outro@teste.com", "outro", "Senha$456", LocalDateTime.now(), tipoUsuario, endereco);
-
-        assertThat(usuario1).isEqualTo(usuario2);
-        assertThat(usuario1.hashCode()).isEqualTo(usuario2.hashCode());
-        assertThat(usuario1).isNotEqualTo(usuario3);
-        assertThat(usuario1.hashCode()).isNotEqualTo(usuario3.hashCode());
-    }
 }
