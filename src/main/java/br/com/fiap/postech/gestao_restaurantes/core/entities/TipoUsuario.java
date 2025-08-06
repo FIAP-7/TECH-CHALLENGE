@@ -25,8 +25,6 @@ public class TipoUsuario {
 
     public static TipoUsuario create(Long id, String nome) {
         if(id == null || nome == null) {
-
-            //TODO: Validar
             //throw new IllegalArgumentException("Faltam dados");
         }
 

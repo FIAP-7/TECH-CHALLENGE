@@ -32,7 +32,6 @@ public class TipoUsuarioController {
     @PostMapping
     @Operation(summary = "Criar tipo usuário", description = "Cria um novo tipo de usuário no sistema.")
     public ResponseEntity<Void> criar(@Valid @RequestBody TipoUsuarioJson tipoUsuarioJson) {
-        //criarTipoUsuarioUsecase.executar(tipoUsuarioJson.mapToDomain());
         TipoUsuarioCoreController tipoUsuarioCoreController = TipoUsuarioCoreController.create(tipoUsuarioRepository);
 
         NovoTipoUsuarioDTO novoTipoUsuarioDTO = tipoUsuarioJson.mapToNovoTipoDTO();
@@ -45,7 +44,6 @@ public class TipoUsuarioController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Deletar tipo de usuário", description = "Remove um tipo de usuário do sistema com base no ID informado.")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        //deletarTipoUsuarioUseCase.executar(id);]
         TipoUsuarioCoreController tipoUsuarioCoreController = TipoUsuarioCoreController.create(tipoUsuarioRepository);
 
         tipoUsuarioCoreController.excluir(id);
@@ -56,9 +54,6 @@ public class TipoUsuarioController {
     @GetMapping("/{id}")
     @Operation(summary = "Buscar tipo de usuário por ID", description = "Retorna os dados de um tipo de usuário a partir do seu ID.")
     public ResponseEntity<TipoUsuarioJson> getTipoUsuarioById(@PathVariable Long id){
-//    	var tipoUsuario = consultarTipoUsuarioUseCase.executar(id);
-//        return tipoUsuario.map(value -> ResponseEntity.ok(value.mapToJson())).orElseGet(() -> ResponseEntity.ok(null));
-
         TipoUsuarioCoreController tipoUsuarioCoreController = TipoUsuarioCoreController.create(tipoUsuarioRepository);
         TipoUsuarioDTO tipoUsuarioDTO = tipoUsuarioCoreController.buscarPorId(id);
 
@@ -70,7 +65,6 @@ public class TipoUsuarioController {
     @PutMapping("/{id}")
     @Operation(summary = "Atualizar dados do tipo de usuário", description = "Atualiza as informações de um tipo de usuário existente.")
     public ResponseEntity<TipoUsuarioJson> atualizarTipoUsuario(@PathVariable Long id, @Valid @RequestBody TipoUsuarioJson tipoUsuarioJson){
-    	//atualizarTipoUsuarioUseCase.executar(id, tipoUsuarioJson.mapToDomain());
         TipoUsuarioCoreController tipoUsuarioCoreController = TipoUsuarioCoreController.create(tipoUsuarioRepository);
 
         TipoUsuarioDTO tipoUsuarioDTO = tipoUsuarioJson.mapToDTO();

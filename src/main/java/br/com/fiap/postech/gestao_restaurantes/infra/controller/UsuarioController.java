@@ -102,14 +102,10 @@ public class UsuarioController {
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado",
                     content = @Content(schema = @Schema(implementation = ExceptionJson.class)))
     })
-    //TODO: Verificar se vai manter como UsuarioDTO ou vai trocar para o usuarioJson
     public ResponseEntity<UsuarioDTO> getUsuarioById(@PathVariable Long id){
         UsuarioCoreController usuarioController = UsuarioCoreController.create(usuarioRepository, tipoUsuarioRepository);
 
         UsuarioDTO usuarioDTO = usuarioController.buscarPorId(id);
-
-        //var usuario = consultarUsuarioUseCase.executar(id);
-        //return usuario.map(value -> ResponseEntity.ok(value.mapToJson())).orElseGet(() -> ResponseEntity.ok(null));
 
         return ResponseEntity.ok(usuarioDTO);
     }
